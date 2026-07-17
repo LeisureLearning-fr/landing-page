@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GIC Ready — Pass your NEBOSH IGC (GIC1/GIC2, 2026 syllabus)</title>
+<meta name="description" content="Adaptive revision for the NEBOSH International General Certificate, fully updated for the 2026 GIC1/GIC2 syllabus. open questions marked with detailed feedback, scenario mode, progress tracker.">
+<meta property="og:title" content="GIC Ready — NEBOSH IGC revision, updated for 2026 (GIC1/GIC2)">
+<meta property="og:description" content="Adaptive practice, open questions marked with detailed feedback, and a GIC1 scenario simulator, built for the current NEBOSH IGC syllabus.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://igc-ready-landing1.vercel.app/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GIC Ready — NEBOSH IGC revision, updated for 2026 (GIC1/GIC2)">
+<meta name="twitter:description" content="Adaptive practice, open questions marked with detailed feedback, and a GIC1 scenario simulator, built for the current NEBOSH IGC syllabus.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://igc-ready-landing1.vercel.app/">
+
+<!--
+  DEV NOTES (remove before shipping if you want a clean file):
+
+  1) FORM BACKEND — this site is on VERCEL, so Netlify Forms is NOT an option.
+     The form posts to Formspree (https://formspree.io/f/xvzezjvp), which is
+     free, needs no server code, and works fine on Vercel's static hosting.
+     Already wired up and live — submissions go to the Formspree dashboard
+     tied to that form ID. Check formspree.io to see entries or set up an
+     email notification / redirect for a thank-you page.
+
+  2) FONTS
+     Loaded from Google Fonts (Space Grotesk / Inter / IBM Plex Mono). This is the
+     only external dependency in the file. Everything else — layout, icons,
+     the "screenshot" mockup — is plain CSS, no framework, no JS required.
+
+  3) SCREENSHOT PLACEHOLDER
+     The hero mockup is a CSS-built illustration of the progress tracker, clearly
+     labelled "preview / illustrative". Swap the .mockup-panel block for a real
+     <img> once you have an actual product screenshot.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper: #F5F4EF;
+    --panel: #FFFFFF;
+    --ink: #1C1B18;
+    --ink-soft: #57534A;
+    --line: #DBD7C9;
+    --safety: #F4B400;
+    --safety-deep: #B98600;
+    --danger: #B3261E;
+    --success: #2F6F4E;
+
+    --font-display: 'Space Grotesk', 'Segoe UI', Arial, sans-serif;
+    --font-body: 'Inter', 'Segoe UI', Arial, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+    --max: 1120px;
+    --radius: 4px;
+    --stripe-h: 6px;
+  }
+
+  *,*::before,*::after{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *,*::before,*::after{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img{ max-width:100%; display:block; }
+  a{ color: inherit; }
+
+  h1,h2,h3{
+    font-family: var(--font-display);
+    line-height: 1.12;
+    margin: 0 0 0.5em 0;
+    letter-spacing: -0.01em;
+  }
+
+  p{ margin: 0 0 1em 0; }
+
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  section{ scroll-margin-top: 64px; }
+
+  /* ---------- signature: hazard stripe ---------- */
+  .hazard-stripe{
+    height: var(--stripe-h);
+    width: 100%;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--ink) 0 10px,
+      var(--safety) 10px 20px
+    );
+  }
+
+  /* ---------- eyebrow / mono tag ---------- */
+  .tag{
+    display:inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    padding: 0.35em 0.7em;
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink);
+  }
+  .tag.tag-safety{ border-color: var(--safety-deep); background: var(--safety); }
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap: 0.5em;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration:none;
+    border-radius: var(--radius);
+    padding: 0.95em 1.5em;
+    border: 2px solid var(--ink);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover{ transform: translateY(-2px); }
+  .btn:focus-visible{ outline: 3px solid var(--safety-deep); outline-offset: 2px; }
+
+  .btn-primary{
+    background: var(--safety);
+    color: var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .btn-primary:hover{ box-shadow: 6px 6px 0 var(--ink); }
+
+  .btn-full{ width: 100%; }
+
+  /* ---------- header ---------- */
+  .site-header{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .brand{
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    text-decoration:none;
+    color: var(--ink);
+  }
+  .brand span{ color: var(--safety-deep); }
+  .header-cta{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 2px solid var(--safety);
+    padding-bottom: 2px;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{ padding: 48px 0 40px; }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .hero-eyebrow{ margin-bottom: 18px; }
+  .hero h1{
+    font-size: clamp(2rem, 5.4vw + 0.6rem, 3.15rem);
+    animation: rise 0.6s ease both;
+  }
+  .hero .lede{
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    animation: rise 0.6s ease 0.08s both;
+  }
+  .hero-cta-row{
+    display:flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 22px;
+    animation: rise 0.6s ease 0.16s both;
+  }
+  .trust-line{
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+  .trust-line strong{ color: var(--ink); }
+
+  @keyframes rise{
+    from{ opacity:0; transform: translateY(10px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  /* ---------- mockup panel (placeholder screenshot) ---------- */
+  .mockup-shell{
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    background: var(--panel);
+    box-shadow: 8px 8px 0 var(--line);
+    overflow:hidden;
+    animation: rise 0.7s ease 0.2s both;
+  }
+  .mockup-topbar{
+    display:flex;
+    align-items:center;
+    gap: 6px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .mockup-dot{ width:9px; height:9px; border-radius:50%; background: var(--line); }
+  .mockup-topbar .mockup-cap{
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .mockup-body{ padding: 20px; }
+  .mockup-body h3{
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+  .mockup-body .mockup-sub{
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .track-row{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 10px;
+    align-items:center;
+    margin-bottom: 12px;
+  }
+  .track-label{ font-size: 0.82rem; }
+  .track-pct{ font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); }
+  .track-bar{
+    grid-column: 1 / -1;
+    height: 7px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .track-bar > span{ display:block; height:100%; }
+  .fill-strong{ background: var(--success); }
+  .fill-mid{ background: var(--safety); }
+  .fill-weak{ background: var(--danger); }
+
+  /* ---------- origin story ---------- */
+  .origin-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .origin-text h2{ font-size: clamp(1.4rem, 2.6vw + 0.6rem, 1.9rem); margin-top: 14px; }
+  .origin-text p{ color: var(--ink-soft); }
+  .origin-text em{ font-style: normal; color: var(--ink); font-weight: 600; }
+
+  .origin-quiz-mock{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .quiz-mock-top{
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+  }
+  .quiz-q{ font-weight: 600; margin-bottom: 12px; }
+  .quiz-opt{
+    display:flex;
+    gap: 10px;
+    align-items:flex-start;
+    font-size: 0.92rem;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+    background: var(--paper);
+  }
+  .quiz-opt-bad{ border-color: var(--danger); background: #FBEEEC; text-decoration: line-through; text-decoration-color: var(--danger); }
+  .quiz-caption{
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    margin: 12px 0 0;
+  }
+
+  /* ---------- generic section heading ---------- */
+  .section-head{ max-width: 60ch; margin-bottom: 32px; }
+  .section-head h2{ font-size: clamp(1.5rem, 2.6vw + 0.6rem, 2.1rem); }
+  .section-head p{ color: var(--ink-soft); }
+
+  .section-pad{ padding: 56px 0; }
+  .section-pad.alt{ background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  /* ---------- benefits ---------- */
+  .benefits-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .benefit-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+  }
+  .benefit-card .tag{ margin-bottom: 12px; }
+  .benefit-card h3{ font-size: 1.05rem; margin-bottom: 6px; }
+  .benefit-card p{ color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 0; }
+
+  /* ---------- differentiation ---------- */
+  .diff-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow:hidden;
+    background: var(--panel);
+  }
+  .diff-col{ padding: 26px 24px; }
+  .diff-col.legacy{ background: #F0EEE6; color: var(--ink-soft); }
+  .diff-col.legacy h3{ color: var(--ink-soft); }
+  .diff-col.current{ border-top: 3px solid var(--safety); }
+  .diff-col h3{
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+  .diff-list{ list-style:none; margin:0; padding:0; }
+  .diff-list li{
+    display:flex;
+    gap: 10px;
+    font-size: 0.92rem;
+    padding: 8px 0;
+    border-top: 1px dashed var(--line);
+  }
+  .diff-list li:first-child{ border-top:none; }
+  .diff-mark{ font-family: var(--font-mono); font-weight:700; flex-shrink:0; }
+  .legacy .diff-mark{ color: var(--danger); }
+  .current .diff-mark{ color: var(--success); }
+  .diff-closing{
+    margin-top: 22px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- pricing ---------- */
+  .pricing-wrap{ display:flex; justify-content:center; }
+  .pricing-card{
+    position: relative;
+    max-width: 440px;
+    width: 100%;
+    background: var(--panel);
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    padding: 30px 26px 30px 40px;
+    overflow: hidden;
+  }
+  .pricing-card::before{
+    content:"";
+    position:absolute;
+    left:0; top:0; bottom:0;
+    width: 16px;
+    background: var(--safety);
+    background-image: radial-gradient(circle at 8px 8px, var(--panel) 0 5px, transparent 5px);
+    background-size: 16px 18px;
+    background-repeat: repeat-y;
+  }
+  .price-row{
+    display:flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 10px 0 2px;
+  }
+  .price-amount{
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 3rem;
+  }
+  .price-amount.price-old{
+    color: var(--ink-soft);
+    font-size: 1.7rem;
+    font-weight: 600;
+    text-decoration: line-through;
+    text-decoration-color: var(--danger);
+    text-decoration-thickness: 2px;
+  }
+  .price-amount.price-new{ color: var(--danger); }
+  .price-terms{ color: var(--ink-soft); font-size: 0.92rem; margin-bottom: 18px; }
+  .price-includes{ list-style:none; margin: 0 0 20px; padding:0; }
+  .price-includes li{
+    display:flex; gap:8px;
+    font-size: 0.92rem;
+    padding: 6px 0;
+    border-top: 1px dashed var(--line);
+  }
+  .price-includes li:first-child{ border-top:none; }
+  .price-check{ color: var(--success); font-weight:700; font-family: var(--font-mono); }
+  .price-frame{
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin-bottom: 20px;
+  }
+  .price-micro{
+    text-align:center;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-top: 12px;
+  }
+
+  /* ---------- waitlist form ---------- */
+  .form-card{
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    text-align:center;
+  }
+  .form-card h2{ font-size: 1.4rem; }
+  .form-card .lede{ color: var(--ink-soft); font-size: 0.95rem; }
+  .field-row{
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  input[type="email"]{
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 0.85em 1em;
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+  }
+  input[type="email"]:focus-visible{ outline: 3px solid var(--safety-deep); outline-offset: 1px; }
+  .form-micro{
+    margin-top: 14px;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  .hp-field{ position:absolute; left:-9999px; top:-9999px; }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{ max-width: 760px; }
+  details{
+    border-bottom: 1px solid var(--line);
+    padding: 16px 2px;
+  }
+  details:first-child{ border-top: 1px solid var(--line); }
+  summary{
+    cursor:pointer;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.02rem;
+    list-style: none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+  }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{
+    content: "+";
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    color: var(--safety-deep);
+    flex-shrink:0;
+  }
+  details[open] summary::after{ content: "–"; }
+  .faq-answer{
+    margin-top: 10px;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    max-width: 65ch;
+  }
+
+  /* ---------- footer ---------- */
+  .site-footer{ padding: 40px 0 60px; }
+  .footer-disclaimer{
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 70ch;
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+  }
+  .footer-signature{
+    margin-top: 14px;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- tablet ---------- */
+  @media (min-width: 640px){
+    .benefits-grid{ grid-template-columns: 1fr 1fr; }
+    .diff-grid{ grid-template-columns: 1fr 1fr; }
+    .diff-col.current{ border-top:none; border-left: 3px solid var(--safety); }
+  }
+
+  /* ---------- desktop ---------- */
+  @media (min-width: 980px){
+    .hero-grid{ grid-template-columns: 1.05fr 0.95fr; gap: 56px; }
+    .origin-grid{ grid-template-columns: 1.1fr 0.9fr; gap: 48px; }
+    .hero-cta-row{ flex-direction: row; align-items:center; }
+    .field-row{ flex-direction: row; }
+    .field-row input[type="email"]{ flex:1; }
+    .field-row button{ flex-shrink:0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hazard-stripe" role="presentation"></div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="#top" class="brand">[ GIC<span>READY</span> ]</a>
+    <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="header-cta" target="_blank" rel="noopener">Join now →</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-eyebrow">
+          <span class="tag tag-safety">GIC1 · GIC2 — 2026 syllabus</span>
+        </div>
+        <h1>Pass your NEBOSH IGC on the first attempt — not eventually.</h1>
+        <p class="lede">Adaptive practice, open questions marked with detailed feedback, and a scenario mode built to match the real GIC1 exam format. Fully rebuilt for the current 2026 GIC1/GIC2 syllabus — not the retired IG1/IG2 format still floating around online.</p>
+        <div class="hero-cta-row">
+          <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="btn btn-primary" target="_blank" rel="noopener">Join now !</a>
+        </div>
+        <p class="trust-line" style="margin-top:18px;">Built by an <strong>HSE consultant</strong> currently preparing for the same exam — not a course platform, a study tool made from the inside.</p>
+      </div>
+
+      <div class="mockup-shell" aria-hidden="true">
+        <div class="mockup-topbar">
+          <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+          <span class="mockup-cap">Preview — illustrative</span>
+        </div>
+        <div class="mockup-body">
+          <h3>Syllabus progress</h3>
+          <p class="mockup-sub">Mapped element by element</p>
+
+          <div class="track-row">
+            <span class="track-label">Managing health &amp; safety</span>
+            <span class="track-pct">82%</span>
+            <span class="track-bar"><span class="fill-strong" style="width:82%"></span></span>
+          </div>
+          <div class="track-row">
+            <span class="track-label">Risk assessment principles</span>
+            <span class="track-pct">64%</span>
+            <span class="track-bar"><span class="fill-mid" style="width:64%"></span></span>
+          </div>
+          <div class="track-row">
+            <span class="track-label">Workplace hazards — physical</span>
+            <span class="track-pct">38%</span>
+            <span class="track-bar"><span class="fill-weak" style="width:38%"></span></span>
+          </div>
+          <div class="track-row">
+            <span class="track-label">Fire safety &amp; emergency arrangements</span>
+            <span class="track-pct">71%</span>
+            <span class="track-bar"><span class="fill-mid" style="width:71%"></span></span>
+          </div>
+          <div class="track-row" style="margin-bottom:0;">
+            <span class="track-label">Musculoskeletal risks</span>
+            <span class="track-pct">45%</span>
+            <span class="track-bar"><span class="fill-weak" style="width:45%"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ORIGIN STORY ============ -->
+  <section class="section-pad alt" id="origin">
+    <div class="wrap">
+      <div class="origin-grid">
+        <div class="origin-text">
+          <span class="tag">Why this exists</span>
+          <h2>I sat through an old school training. That's what pushed me to build something else.</h2>
+          <p>Going into my own GIC prep, I picked — without really knowing it — a fairly mediocre training provider. Hours of video, a man talking over a PowerPoint slide. Their idea of "interactive" was multiple-choice questions like this one:</p>
+          <p>That's when it clicked: there's a lot more room to keep this rigorous <em>and</em> make it actually engaging. So I built this tool around the NEBOSH content itself, my own study notes and case studies, and kept it current with today's H&amp;S laws and guidance — the resource I wish I'd had instead. It's not affiliated with NEBOSH, but every question stays true to the official syllabus — just built to feel less like a lecture and more like the kind of last-minute quizzing you'd do with your mates the night before a school exam.</p>
+        </div>
+
+        <div class="origin-quiz-mock" aria-hidden="true">
+          <p class="quiz-mock-top">An actual question, from an actual training provider</p>
+          <p class="quiz-q">I'm about to start a risky task. I should:</p>
+          <div class="quiz-opt"><span class="diff-mark" style="color:var(--success);">A</span><span>Analyse the work situation and write a method statement.</span></div>
+          <div class="quiz-opt quiz-opt-bad"><span class="diff-mark" style="color:var(--danger);">B</span><span>It's quick — let's just get on with it.</span></div>
+          <p class="quiz-caption">Yes. That was genuinely one of the two options.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BENEFITS ============ -->
+  <section class="section-pad">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What you actually walk away with</h2>
+        <p>Not a longer feature list — this is what changes in how you prepare.</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <span class="tag">Focus</span>
+          <h3>Stop re-reading notes that already stuck</h3>
+          <p>Practice adapts to your weak syllabus elements, so every session works on what's actually going to cost you marks — not what you're already comfortable with.</p>
+        </div>
+        <div class="benefit-card">
+          <span class="tag">Feedback</span>
+          <h3>Learn to write answers examiners actually credit</h3>
+          <p>Open questions get detailed, structured feedback — not just a right/wrong tick — so you build the habit of writing for marks, not just for correctness.</p>
+        </div>
+        <div class="benefit-card">
+          <span class="tag">Exam format</span>
+          <h3>Walk into GIC1 having already done it once</h3>
+          <p>Train inside a mock scenario-and-attachments exercise that mirrors the real open-book GIC1 format, so exam day isn't the first time you've worked this way.</p>
+        </div>
+        <div class="benefit-card">
+          <span class="tag">Visibility</span>
+          <h3>Know exactly where you stand before you book</h3>
+          <p>A progress tracker maps every attempt back to the syllabus elements, so you can decide with confidence — not hope — when you're ready to sit the exam.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIFFERENTIATION ============ -->
+  <section class="section-pad alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Most free question banks are training you for an exam that no longer exists</h2>
+        <p>The NEBOSH IGC syllabus changed in 2026. Most of the free content candidates share online didn't.</p>
+      </div>
+      <div class="diff-grid">
+        <div class="diff-col legacy">
+          <h3>Free &amp; legacy question banks</h3>
+          <ul class="diff-list">
+            <li><span class="diff-mark">✕</span><span>Written for the retired IG1/IG2 specification</span></li>
+            <li><span class="diff-mark">✕</span><span>No structured feedback on open or written answers</span></li>
+            <li><span class="diff-mark">✕</span><span>No simulation of the new GIC1 scenario-and-attachments format</span></li>
+            <li><span class="diff-mark">✕</span><span>Static — same questions, same order, every single time</span></li>
+          </ul>
+        </div>
+        <div class="diff-col current">
+          <h3>GIC Ready — 2026 GIC1/GIC2</h3>
+          <ul class="diff-list">
+            <li><span class="diff-mark">✓</span><span>Rebuilt around the current GIC1/GIC2 specification</span></li>
+            <li><span class="diff-mark">✓</span><span>Detailed feedback on every open and scenario answer</span></li>
+            <li><span class="diff-mark">✓</span><span>Scenario + supporting-documents mode matching the real GIC1 format</span></li>
+            <li><span class="diff-mark">✓</span><span>Adapts to your results as you go — different every session</span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="diff-closing">// syllabus updated 2026 — content rebuilt to match, not patched over.</p>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section class="section-pad" id="pricing">
+    <div class="wrap">
+      <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center;">
+        <span class="tag tag-safety">Launch pricing — limited</span>
+        <h2 style="margin-top:14px;">One price. One payment. No subscription.</h2>
+      </div>
+      <div class="pricing-wrap">
+        <div class="pricing-card">
+          <span class="tag">6 months access</span>
+          <div class="price-row">
+            <span class="price-amount price-old">€27</span>
+            <span class="price-amount price-new">€15</span>
+          </div>
+          <p class="price-terms">One-time payment · access for 6 months · no recurring billing</p>
+
+          <ul class="price-includes">
+            <li><span class="price-check">✓</span><span>All 5 study modes</span></li>
+            <li><span class="price-check">✓</span><span>Open questions marked with detailed feedback</span></li>
+            <li><span class="price-check">✓</span><span>GIC1 scenario + supporting-documents simulator</span></li>
+            <li><span class="price-check">✓</span><span>Adaptive difficulty</span></li>
+            <li><span class="price-check">✓</span><span>Full syllabus progress tracker</span></li>
+          </ul>
+
+          <p class="price-frame">Pay once, revise until your exam date. Nothing renews, nothing to remember to cancel — six months is usually more runway than most candidates need.</p>
+
+          <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="btn btn-primary btn-full" target="_blank" rel="noopener">Join now !</a>
+          <p class="price-micro">Waitlist members get first access, and the €27 rate is locked in before any public price increase.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section-pad">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Questions before you join</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Does this cover both GIC1 and GIC2?</summary>
+          <p class="faq-answer">Yes. Question banks, the scenario simulator and the progress tracker are mapped to both GIC1 (management of health and safety) and GIC2 (risk assessment) as defined in the 2026 syllabus.</p>
+        </details>
+        <details>
+          <summary>What language is it in?</summary>
+          <p class="faq-answer">English, matching the language of the official NEBOSH IGC exam. If there's enough demand for French-language support material, it'll be considered after launch — let us know on the waitlist form.</p>
+        </details>
+        <details>
+          <summary>Do I still need to take a NEBOSH-accredited training course?</summary>
+          <p class="faq-answer">Yes. This is a revision and practice tool, meant to be used after your training, while you're preparing for the exam itself — not a replacement for an accredited course. It's built to consolidate what you've already learned and get you exam-ready.</p>
+        </details>
+        <details>
+          <summary>Is there a refund policy?</summary>
+          <p class="faq-answer">Yes. If you're not satisfied within the first 14 days of access, you get a full refund, no conditions attached.</p>
+        </details>
+        <details>
+          <summary>How is this different from the free NEBOSH quiz sites?</summary>
+          <p class="faq-answer">Most free quiz banks are recycled multiple-choice questions written for the retired IG1/IG2 format, with no marking on written or scenario answers. This tool is rebuilt for the current GIC1/GIC2 syllabus, gives detailed feedback on open and scenario answers, and tracks your weak points syllabus element by syllabus element.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-disclaimer">Independent study tool. Not affiliated with, endorsed by, or sponsored by NEBOSH. NEBOSH® is a registered trademark of the National Examination Board in Occupational Safety and Health (NEBOSH).</p>
+    <p class="footer-signature">© 2026 GIC Ready · Built by an HSE consultant, for HSE candidates.</p>
+  </div>
+</footer>
+
+</body>
+</html>
