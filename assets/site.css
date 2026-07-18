@@ -1,10 +1,5 @@
 /* ================================================================
    IGC Ready — shared design system
-   Used by /blog/ and any future non-homepage pages.
-   Tokens mirror index.html's inline <style> exactly. If you change
-   a color/font/spacing token on the homepage, mirror it here too —
-   the homepage intentionally stays a self-contained file, so this
-   sheet is the second (and only other) place these values live.
    ================================================================ */
 
 :root{
@@ -64,7 +59,6 @@ p{ margin: 0 0 1em 0; }
 
 section{ scroll-margin-top: 64px; }
 
-/* ---------- signature: hazard stripe ---------- */
 .hazard-stripe{
   height: var(--stripe-h);
   width: 100%;
@@ -75,7 +69,6 @@ section{ scroll-margin-top: 64px; }
   );
 }
 
-/* ---------- eyebrow / mono tag ---------- */
 .tag{
   display:inline-block;
   font-family: var(--font-mono);
@@ -91,7 +84,6 @@ section{ scroll-margin-top: 64px; }
 }
 .tag.tag-safety{ border-color: var(--safety-deep); background: var(--safety); }
 
-/* ---------- buttons ---------- */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -118,7 +110,6 @@ section{ scroll-margin-top: 64px; }
 .btn-primary:hover{ box-shadow: 6px 6px 0 var(--ink); }
 .btn-full{ width: 100%; }
 
-/* ---------- header ---------- */
 .site-header{
   position: sticky;
   top: 0;
@@ -166,7 +157,6 @@ section{ scroll-margin-top: 64px; }
   white-space: nowrap;
 }
 
-/* ---------- generic section heading ---------- */
 .section-head{ max-width: 60ch; margin-bottom: 32px; }
 .section-head h2{ font-size: clamp(1.5rem, 2.6vw + 0.6rem, 2.1rem); }
 .section-head p{ color: var(--ink-soft); }
@@ -174,7 +164,6 @@ section{ scroll-margin-top: 64px; }
 .section-pad{ padding: 56px 0; }
 .section-pad.alt{ background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 
-/* ---------- footer ---------- */
 .site-footer{ padding: 40px 0 60px; }
 .footer-disclaimer{
   font-family: var(--font-mono);
@@ -192,8 +181,7 @@ section{ scroll-margin-top: 64px; }
 }
 
 /* ================================================================
-   BLOG — listing + article. Additive only; nothing above this
-   line changes when you touch these.
+   BLOG — listing + article
    ================================================================ */
 
 .breadcrumb{
@@ -205,7 +193,6 @@ section{ scroll-margin-top: 64px; }
 .breadcrumb a{ text-decoration:none; color: var(--ink-soft); border-bottom: 1px dashed var(--line); }
 .breadcrumb a:hover{ color: var(--ink); border-bottom-color: var(--ink); }
 
-/* ---------- blog listing ---------- */
 .blog-hero{ padding: 44px 0 8px; }
 .blog-hero h1{ font-size: clamp(1.9rem, 4vw + 0.6rem, 2.6rem); margin-top: 14px; }
 .blog-hero .lede{ color: var(--ink-soft); max-width: 56ch; font-size: 1.05rem; }
@@ -237,7 +224,6 @@ section{ scroll-margin-top: 64px; }
   letter-spacing: 0.04em;
 }
 
-/* ---------- article ---------- */
 .article-header{ padding: 44px 0 8px; }
 .article-header h1{ font-size: clamp(1.8rem, 3.6vw + 0.6rem, 2.5rem); margin-top: 14px; }
 .article-meta{
@@ -282,7 +268,6 @@ section{ scroll-margin-top: 64px; }
 .post-cta h3{ font-size: 1.15rem; margin-bottom: 8px; }
 .post-cta p{ color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 18px; }
 
-/* ---------- tablet ---------- */
 @media (min-width: 640px){
   .post-grid{ grid-template-columns: 1fr 1fr; }
 }
