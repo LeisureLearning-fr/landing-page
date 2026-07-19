@@ -7,7 +7,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const SITE_URL = "https://igc-leisurelearning.com";
+const SITE_URL = "https://www.igc-leisurelearning.com";
 
 function isoDate(mtime) {
   return mtime.toISOString().slice(0, 10);
