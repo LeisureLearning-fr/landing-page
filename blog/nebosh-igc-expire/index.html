@@ -24,552 +24,202 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
 
-<style>
-  :root{
-    --paper: #F5F4EF;
-    --panel: #FFFFFF;
-    --ink: #1C1B18;
-    --ink-soft: #57534A;
-    --line: #DBD7C9;
-    --safety: #F4B400;
-    --safety-deep: #B98600;
-    --danger: #B3261E;
-    --success: #2F6F4E;
-
-    --font-display: 'Space Grotesk', 'Segoe UI', Arial, sans-serif;
-    --font-body: 'Inter', 'Segoe UI', Arial, sans-serif;
-    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
-
-    --max: 1120px;
-    --radius: 4px;
-    --stripe-h: 6px;
-  }
-
-  *,*::before,*::after{ box-sizing: border-box; }
-  html{ scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior: auto; }
-    *,*::before,*::after{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
-  }
-
-  body{
-    margin:0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  img{ max-width:100%; display:block; }
-  a{ color: inherit; text-decoration: underline; text-decoration-color: var(--safety-deep); text-underline-offset: 3px; }
-  a:hover{ opacity: 0.8; }
-
-  h1,h2,h3{
-    font-family: var(--font-display);
-    line-height: 1.12;
-    margin: 0 0 0.5em 0;
-    letter-spacing: -0.01em;
-  }
-
-  h1{ font-size: 2.5rem; margin-bottom: 0.3em; }
-  h2{ font-size: 1.8rem; margin-top: 1.2em; }
-  h3{ font-size: 1.2rem; }
-
-  p{ margin: 0 0 1em 0; }
-  ul,ol{ margin: 0 0 1.5em 1.5em; }
-  li{ margin-bottom: 0.5em; }
-
-  .wrap{
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  section{ scroll-margin-top: 64px; }
-
-  /* ---------- signature: hazard stripe ---------- */
-  .hazard-stripe{
-    height: var(--stripe-h);
-    width: 100%;
-    background: repeating-linear-gradient(
-      45deg,
-      var(--ink) 0 10px,
-      var(--safety) 10px 20px
-    );
-  }
-
-  /* ---------- eyebrow / mono tag ---------- */
-  .tag{
-    display:inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    padding: 0.35em 0.7em;
-    border: 1px solid var(--ink);
-    border-radius: 2px;
-    background: transparent;
-    color: var(--ink);
-    text-decoration: none;
-    margin-bottom: 0.5em;
-  }
-  .tag.tag-safety{ border-color: var(--safety-deep); background: var(--safety); }
-
-  /* ---------- buttons ---------- */
-  .btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap: 0.5em;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1rem;
-    text-decoration:none;
-    border-radius: var(--radius);
-    padding: 0.95em 1.5em;
-    border: 2px solid var(--ink);
-    cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-  }
-  .btn:hover{ transform: translateY(-2px); }
-  .btn:focus-visible{ outline: 3px solid var(--safety-deep); outline-offset: 2px; }
-
-  .btn-primary{
-    background: var(--safety);
-    color: var(--ink);
-    box-shadow: 4px 4px 0 var(--ink);
-  }
-  .btn-primary:hover{ box-shadow: 6px 6px 0 var(--ink); }
-
-  .btn-ghost{
-    background: transparent;
-    color: var(--ink);
-  }
-  .btn-ghost:hover{ background: var(--line); }
-
-  .btn-full{ width: 100%; }
-
-  /* ---------- header ---------- */
-  .site-header{
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: var(--paper);
-    border-bottom: 1px solid var(--line);
-  }
-  .site-header .wrap{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding-top: 14px;
-    padding-bottom: 14px;
-  }
-  .brand{
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 0.03em;
-    text-decoration:none;
-    color: var(--ink);
-  }
-  .brand span{ color: var(--safety-deep); }
-
-  /* ---------- hero ---------- */
-  .article-hero{
-    padding-top: 60px;
-    padding-bottom: 40px;
-  }
-  .article-hero .tag{ margin-bottom: 1em; }
-  .article-hero h1{ margin-top: 0; }
-
-  /* ---------- table of contents ---------- */
-  .toc{
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin: 2em 0;
-  }
-  .toc h3{ font-size: 1rem; margin-top: 0; }
-  .toc ul{ margin: 0.5em 0 0 1.5em; }
-  .toc li{ margin-bottom: 0.4em; }
-  .toc a{ text-decoration: none; }
-  .toc a:hover{ text-decoration: underline; }
-
-  /* ---------- article body ---------- */
-  .article-body{
-    max-width: 820px;
-    margin: 0 auto;
-  }
-  .article-body h2{ margin-top: 1.5em; }
-
-  /* ---------- comparison table ---------- */
-  .comparison-table{
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    margin: 2em 0;
-  }
-  .comparison-table th,
-  .comparison-table td{
-    padding: 12px 16px;
-    text-align: left;
-    border-bottom: 1px solid var(--line);
-  }
-  .comparison-table th{
-    background: var(--paper);
-    font-weight: 600;
-    font-family: var(--font-display);
-  }
-  .comparison-table tr:last-child td{ border-bottom: none; }
-
-  /* ---------- highlight box ---------- */
-  .highlight-box{
-    background: var(--panel);
-    border-left: 4px solid var(--safety-deep);
-    padding: 20px;
-    margin: 2em 0;
-    border-radius: var(--radius);
-  }
-  .highlight-box h3{ margin-top: 0; }
-
-  /* ---------- faq list ---------- */
-  .faq-list{
-    max-width: 820px;
-    margin: 0 auto;
-  }
-  .faq-list details{
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 0;
-    margin-bottom: 12px;
-  }
-  .faq-list summary{
-    padding: 16px 20px;
-    cursor: pointer;
-    font-weight: 600;
-    font-family: var(--font-display);
-    user-select: none;
-    transition: background 0.15s ease;
-  }
-  .faq-list summary:hover{
-    background: var(--paper);
-  }
-  .faq-list details[open] summary{
-    background: var(--paper);
-    border-bottom: 1px solid var(--line);
-  }
-  .faq-answer{
-    padding: 0 20px 16px 20px;
-    margin: 0;
-  }
-
-  /* ---------- author box ---------- */
-  .author-box{
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 24px;
-    margin-top: 3em;
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    max-width: 820px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .author-box img{
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .author-box h3{ margin-top: 0; margin-bottom: 0.3em; }
-  .author-box p{ margin-bottom: 0; font-size: 0.95rem; }
-
-  /* ---------- cta box ---------- */
-  .cta-box{
-    background: var(--safety);
-    border-radius: var(--radius);
-    padding: 40px;
-    text-align: center;
-    margin: 3em auto 0;
-    max-width: 820px;
-  }
-  .cta-box h3{ margin-top: 0; }
-  .cta-row{
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 20px;
-  }
-
-  /* ---------- section padding ---------- */
-  .section-pad{
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-  .section-pad.alt{ background: var(--panel); }
-
-  /* ---------- section head ---------- */
-  .section-head{
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  .section-head h2{ margin: 0; }
-
-  /* ---------- footer ---------- */
-  .site-footer{
-    border-top: 1px solid var(--line);
-    background: var(--panel);
-    padding: 40px 0;
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-  }
-  .site-footer .wrap{ max-width: 820px; }
-  .site-footer p{ margin: 0 0 0.5em 0; }
-  .footer-disclaimer{ font-size: 0.85rem; }
-
-  /* ---------- responsive ---------- */
-  @media (max-width: 768px){
-    h1{ font-size: 2rem; }
-    h2{ font-size: 1.5rem; }
-    .article-hero{ padding-top: 40px; }
-    .cta-row{ flex-direction: column; }
-    .cta-row .btn{ width: 100%; }
-    .author-box{ flex-direction: column; text-align: center; }
-    .author-box img{ margin: 0 auto; }
-  }
-</style>
+<!-- Vercel Web Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
-
 <body>
 
-<div class="hazard-stripe"></div>
+<div class="hazard-stripe" role="presentation"></div>
 
 <header class="site-header">
   <div class="wrap">
-    <a href="/" class="brand">IGC <span>Ready</span></a>
+    <a href="/#top" class="brand">[ IGC<span>READY</span> ]</a>
+    <nav class="header-nav"><a href="/blog/" class="nav-link" aria-current="page">Blog</a></nav>
+    <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="header-cta" target="_blank" rel="noopener">Join now →</a>
   </div>
 </header>
 
-<main>
+<main id="top">
 
-  <!-- ============ HERO ============ -->
-  <section class="article-hero">
+  <section class="article-header">
     <div class="wrap">
-      <div class="article-body">
-        <span class="tag tag-safety">Certification</span>
-        <h1>Does the NEBOSH IGC Expire?</h1>
-        <p style="font-size:1.1rem; color: var(--ink-soft); margin-bottom: 0;">Complete 2026 guide to certification validity, renewal requirements, and what you actually need to do to keep your credential valued by employers.</p>
-      </div>
+      <p class="breadcrumb"><a href="/blog/">Blog</a> / Does the NEBOSH IGC Expire?</p>
+      <span class="tag tag-safety">Certification</span>
+      <h1>Does the NEBOSH IGC Expire?</h1>
+      <p class="article-meta">Jul 19, 2026 · 6 min read</p>
     </div>
   </section>
 
-  <!-- ============ SECTION: QUICK ANSWER ============ -->
   <section class="section-pad">
     <div class="wrap">
       <div class="article-body">
-        <div class="highlight-box">
-          <h3 style="margin-top:0;">The short answer</h3>
-          <p style="margin-bottom:0;"><strong>No, the NEBOSH IGC does not expire.</strong> Once you pass the International General Certificate exam, you hold that qualification for life. NEBOSH does not revoke or expire your certification based on time alone.</p>
+        <p>Short answer: no. Once you pass the NEBOSH International General Certificate, it's yours for life — no renewal, no re-sit, no expiry date printed on the certificate. But "never expires" and "still gets you the job" aren't quite the same thing, so it's worth understanding both sides.</p>
+
+        <div class="callout">
+          <strong>The short answer:</strong> the NEBOSH IGC does not expire. NEBOSH does not revoke or time-limit the qualification once you've passed it.
         </div>
 
-        <p>However—and this is important—there's a critical distinction between three things:</p>
+        <p>Where it gets more nuanced is the difference between three separate things:</p>
         <ul>
-          <li><strong>The qualification itself</strong> (which never expires)</li>
-          <li><strong>Its relevance and employability</strong> (which can diminish over time)</li>
-          <li><strong>Regulatory recognition</strong> (which depends on keeping knowledge current)</li>
+          <li><strong>The qualification itself</strong> — never expires</li>
+          <li><strong>Its relevance and employability</strong> — can diminish over time</li>
+          <li><strong>Regulatory recognition</strong> — depends on keeping knowledge current</li>
         </ul>
 
-        <p>Understanding this distinction matters significantly if you're using the qualification for employment, freelance work, or professional positioning. Let's dig into each.</p>
+        <p>That distinction matters if you're using the qualification for employment, freelance work, or professional positioning. Here's each one in turn.</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ SECTION: HOW LONG VALID ============ -->
   <section class="section-pad alt">
     <div class="wrap">
       <div class="article-body">
         <h2 id="how-long-valid">How long is the NEBOSH IGC valid for?</h2>
-        <p>The NEBOSH IGC is <strong>valid for life</strong> from the date you pass the exam. There is no renewal requirement, no periodic reassessment, and no "refresher" module mandated by NEBOSH.</p>
+        <p>The NEBOSH IGC is valid for life from the date you pass the exam. There's no renewal requirement, no periodic reassessment, and no mandatory "refresher" module.</p>
 
-        <p>This differs from some other HSE certifications and professional credentials that require:</p>
+        <p>That's a different model to some other HSE certifications, which do require:</p>
         <ul>
           <li>Periodic renewals (e.g., MASE recertification every 3 years)</li>
           <li>Continuing professional development (CPD) hours</li>
           <li>Re-examination after a set period</li>
         </ul>
 
-        <p>NEBOSH takes a different approach: your IGC remains officially recognized indefinitely. You never have to sit the exam again, never have to pay a renewal fee, and never have to complete mandatory CPD to keep your qualification "active."</p>
+        <p>NEBOSH doesn't work that way. Your IGC stays officially recognized indefinitely — no exam to re-sit, no fee to keep it "active."</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ SECTION: VALID VS VALUED ============ -->
   <section class="section-pad">
     <div class="wrap">
       <div class="article-body">
         <h2 id="valid-vs-valued">The gap between "valid" and "valued"</h2>
-        <p>Here's where many NEBOSH IGC holders encounter confusion. While your certification never officially expires, <strong>employers and clients may view outdated qualifications skeptically</strong> if:</p>
+        <p>This is where most of the confusion actually sits. While your certification never officially expires, employers and clients can still view an older qualification skeptically if:</p>
         <ul>
-          <li>Your qualification is more than 10–15 years old</li>
-          <li>HSE regulations or best practices have significantly evolved</li>
-          <li>You cannot demonstrate current knowledge of your field</li>
-          <li>You've had no recent practical experience in health and safety</li>
+          <li>It's more than 10–15 years old</li>
+          <li>HSE regulations or best practices have moved on significantly since</li>
+          <li>You can't demonstrate current knowledge of your field</li>
+          <li>You've had no recent practical HSE experience</li>
         </ul>
 
-        <h3>Why this matters</h3>
-        <p>If you passed the NEBOSH IGC in 2010 and haven't worked in HSE since then, your qualification is technically still valid—but a prospective employer in 2026 might reasonably question whether you're current on modern risk management practices, digital safety tools, or recent legislative changes.</p>
+        <h3>Why this matters in practice</h3>
+        <p>If you passed the NEBOSH IGC in 2010 and haven't worked in HSE since, the qualification is technically still valid — but a hiring manager in 2026 might reasonably ask whether you're current on modern risk management practices, digital safety tools, or recent legislative changes.</p>
 
-        <p>This is especially true in specialized sectors like:</p>
+        <p>This shows up more in specialized sectors, where the underlying rules move faster than the syllabus does:</p>
         <ul>
-          <li><strong>Construction safety</strong> — with evolving building standards</li>
+          <li><strong>Construction safety</strong> — evolving building standards</li>
           <li><strong>Chemical and process safety</strong> — changing regulations</li>
-          <li><strong>Occupational health management</strong> — new ergonomic standards</li>
-          <li><strong>Remote/hybrid work safety</strong> — relatively new domain</li>
+          <li><strong>Occupational health management</strong> — newer ergonomic standards</li>
+          <li><strong>Remote/hybrid work safety</strong> — a genuinely new domain</li>
         </ul>
 
-        <p>In these cases, your IGC is still recognized—but supplementing it with current, relevant experience or additional qualifications makes your candidacy much stronger.</p>
+        <p>Your IGC is still recognized in all of these — but pairing it with current, relevant experience makes a much stronger case than the certificate on its own.</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ SECTION: VALIDITY BY PURPOSE ============ -->
   <section class="section-pad alt">
     <div class="wrap">
       <div class="article-body">
-        <h2 id="validity-by-purpose">NEBOSH IGC validity for different purposes</h2>
+        <h2 id="validity-by-purpose">NEBOSH IGC validity, by purpose</h2>
 
-        <div style="margin-top:2em;">
-          <h3>1. Professional Qualification Recognition</h3>
-          <p>Your NEBOSH IGC is <strong>recognized indefinitely</strong> as a professional qualification by:</p>
-          <ul>
-            <li>IOSH (Institution of Occupational Safety and Health)</li>
-            <li>Industry bodies in the UK, Middle East, Asia, and beyond</li>
-            <li>Multinational corporations with standardized HSE requirements</li>
-          </ul>
-          <p>You can list it on your CV, LinkedIn profile, and professional documents without any time limit.</p>
-        </div>
+        <h3>1. Professional qualification recognition</h3>
+        <p>Your NEBOSH IGC is recognized indefinitely as a professional qualification by IOSH, industry bodies across the UK, Middle East, and Asia, and multinational corporations with standardized HSE requirements. You can list it on your CV or LinkedIn without any time limit.</p>
 
-        <div style="margin-top:2em;">
-          <h3>2. Employment and Freelance Work</h3>
-          <p>Employers' views vary based on organizational size and HSE maturity:</p>
-          <ul>
-            <li><strong>Large organizations</strong> (ISO 45001 certified): Often recognize NEBOSH IGC indefinitely but may prefer candidates with recent practical experience</li>
-            <li><strong>Mid-sized companies</strong>: May require supplementary training or evidence of continuous learning</li>
-            <li><strong>Regulatory bodies</strong>: Typically recognize NEBOSH IGC without expiration, though they may require proof of continuing competence in your specific role</li>
-          </ul>
-        </div>
+        <h3>2. Employment and freelance work</h3>
+        <p>Employers' views vary by size and HSE maturity:</p>
+        <ul>
+          <li><strong>Large, ISO 45001-certified organizations</strong> — usually recognize it indefinitely, but may still prefer candidates with recent practical experience</li>
+          <li><strong>Mid-sized companies</strong> — may ask for supplementary training or evidence of continuous learning</li>
+          <li><strong>Regulatory bodies</strong> — typically recognize it without expiration, though some require proof of continuing competence for specific roles</li>
+        </ul>
 
-        <div style="margin-top:2em;">
-          <h3>3. Regulatory Compliance</h3>
-          <p>For <strong>HSE-regulated roles</strong> (e.g., Competent Person for specific hazards), your NEBOSH IGC demonstrates baseline competence. However:</p>
-          <ul>
-            <li>Regulatory bodies may require evidence of continuous, relevant experience</li>
-            <li>Sector-specific regulations might mandate additional qualifications</li>
-            <li>Role-specific competence requirements may supersede general NEBOSH credentials</li>
-          </ul>
-        </div>
+        <h3>3. Regulatory compliance</h3>
+        <p>For HSE-regulated roles (e.g., Competent Person for a specific hazard), the IGC demonstrates baseline competence. But regulators may still ask for evidence of continuous, relevant experience, and sector-specific rules can require additional qualifications on top.</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ SECTION: RENEWAL ============ -->
   <section class="section-pad">
     <div class="wrap">
       <div class="article-body">
         <h2 id="renewal">Do you need to renew your NEBOSH IGC?</h2>
-        <p><strong>Officially: No.</strong> NEBOSH does not require renewal, re-examination, or CPD hours tied to your IGC. There's no certificate to reprint, no fee to pay, and no box to tick.</p>
-        <p><strong>Practically: It depends.</strong> To keep your qualification <em>valued</em> by employers and clients, consider these steps.</p>
+        <p><strong>Officially: no.</strong> No renewal, no re-examination, no CPD hours tied to keeping it valid. There's no certificate to reprint, no fee to pay, and no box to tick.</p>
+        <p><strong>Practically: it depends</strong> — on how you want the qualification to read to an employer. To keep it valued rather than just valid, worth considering:</p>
 
-        <h3>Recommended best practices</h3>
         <ul>
-          <li><strong>Stay active in HSE roles</strong> — Continuous practical experience demonstrates ongoing competence</li>
-          <li><strong>Pursue advanced qualifications</strong> — NEBOSH Diplomas, CAPM, or MASE certification show career progression</li>
-          <li><strong>Document CPD activities</strong> — Even though not mandatory, track professional development, training, and project work</li>
-          <li><strong>Keep knowledge current</strong> — Follow HSE guidance updates, attend industry webinars, or take refresher courses</li>
-          <li><strong>Specialize further</strong> — Gain recognized qualifications in your specific sector (e.g., NEBOSH Construction, Fire &amp; Rescue)</li>
-        </ul>
-
-        <p>By doing these things, you're not renewing your IGC—you're ensuring it remains a credible, valued credential in your professional positioning.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SECTION: IF OUTDATED ============ -->
-  <section class="section-pad">
-    <div class="wrap">
-      <div class="article-body">
-        <h2 id="if-outdated">If your NEBOSH IGC is "outdated," what should you do?</h2>
-        <p>If you hold a NEBOSH IGC from several years ago and want to strengthen your professional position, you have several clear paths forward.</p>
-
-        <h3>Option 1: Pursue the NEBOSH Diploma</h3>
-        <p>The <strong>Diploma in Environmental, Health and Safety Management</strong> is the advanced credential. It demonstrates specialized knowledge and is highly valued by employers. No formal "upgrade" path exists—you'd take the Diploma as a new qualification.</p>
-
-        <h3>Option 2: Take NEBOSH specialization modules</h3>
-        <p>NEBOSH offers sector-specific qualifications that complement your IGC and show focused expertise:</p>
-        <ul>
-          <li>NEBOSH Construction (NCC1/NCC2)</li>
-          <li>NEBOSH Fire &amp; Rescue</li>
-          <li>NEBOSH Oil and Gas</li>
-          <li>NEBOSH Process Safety Management</li>
-        </ul>
-
-        <h3>Option 3: Pursue CAPM or project management certification</h3>
-        <p>If you're moving toward a leadership role, <strong>CAPM (Certified Associate in Project Management)</strong> or <strong>PMP</strong> pairs well with an HSE background and keeps your credentials contemporary.</p>
-
-        <h3>Option 4: Document continuous professional development</h3>
-        <ul>
-          <li>Attend industry conferences and training</li>
-          <li>Complete manufacturer-specific courses (e.g., confined space rescue, fall protection systems)</li>
-          <li>Lead safety initiatives and document outcomes</li>
-          <li>Take online courses in emerging areas (e.g., AI-driven safety, mental health at work)</li>
+          <li><strong>Stay active in HSE roles</strong> — continuous practical experience is the strongest signal of current competence</li>
+          <li><strong>Pursue advanced qualifications</strong> — the NEBOSH Diploma, CAPM, or MASE certification show career progression</li>
+          <li><strong>Document CPD activities</strong> — not mandatory, but worth tracking training and project work anyway</li>
+          <li><strong>Keep knowledge current</strong> — follow HSE guidance updates, industry webinars, or refresher courses</li>
+          <li><strong>Specialize further</strong> — sector-specific NEBOSH qualifications (Construction, Fire &amp; Rescue) show focused expertise</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ============ SECTION: KEY TAKEAWAYS ============ -->
   <section class="section-pad alt">
     <div class="wrap">
       <div class="article-body">
-        <h2>Key takeaways: NEBOSH IGC expiration rules</h2>
-        <div style="background:var(--panel); border: 1px solid var(--line); border-radius:var(--radius); padding:20px; max-width:none;">
-          <ol>
-            <li><strong>The NEBOSH IGC does not expire</strong> — You hold the qualification for life</li>
-            <li><strong>No renewal is required</strong> — Unlike MASE or CAPM, there's no mandatory refresher</li>
-            <li><strong>Official recognition is indefinite</strong> — NEBOSH, IOSH, and regulatory bodies recognize it indefinitely</li>
-            <li><strong>Market relevance may change</strong> — Employers may value recent experience alongside your qualification</li>
-            <li><strong>Continuous learning is optional but recommended</strong> — To stay competitive, keep your knowledge current</li>
-            <li><strong>You can list it on your CV forever</strong> — There's no need to remove it or update it based on age</li>
+        <h2 id="if-outdated">If your NEBOSH IGC feels outdated, what to do about it</h2>
+        <p>If you hold an IGC from several years back and want to strengthen your position, there are a few clear paths.</p>
+
+        <h3>Pursue the NEBOSH Diploma</h3>
+        <p>The Diploma in Environmental, Health and Safety Management is the advanced credential — highly valued by employers. There's no formal "upgrade" path from the IGC; you'd sit the Diploma as a new qualification in its own right.</p>
+
+        <h3>Take a specialization module</h3>
+        <p>NEBOSH offers sector-specific qualifications that complement the IGC: Construction (NCC1/NCC2), Fire &amp; Rescue, Oil and Gas, Process Safety Management.</p>
+
+        <h3>Pair it with project management credentials</h3>
+        <p>If you're moving toward a leadership role, CAPM or PMP pairs naturally with an HSE background and signals your credentials are current.</p>
+
+        <h3>Document your CPD, even informally</h3>
+        <p>Conference attendance, manufacturer-specific training (confined space rescue, fall protection systems), safety initiatives you've led, or newer courses in emerging areas — all of it builds the case alongside the certificate itself.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad">
+    <div class="wrap">
+      <div class="article-body">
+        <h2>Key takeaways</h2>
+        <div class="callout">
+          <ol style="margin:0; padding-left:1.2em;">
+            <li><strong>The NEBOSH IGC does not expire</strong> — it's a lifetime qualification</li>
+            <li><strong>No renewal is required</strong> — unlike MASE or CAPM, there's no mandatory refresher</li>
+            <li><strong>Official recognition is indefinite</strong> — NEBOSH, IOSH, and regulatory bodies all recognize it without a time limit</li>
+            <li><strong>Market relevance can still shift</strong> — employers may weigh recent experience alongside the qualification</li>
+            <li><strong>Continuous learning is optional but worth it</strong> — it's what keeps the certificate competitive, not compliant</li>
+            <li><strong>You can list it on your CV indefinitely</strong> — no need to remove or caveat it based on age</li>
           </ol>
+        </div>
+
+        <div class="post-cta">
+          <h3>Preparing for the IGC itself, not just researching it?</h3>
+          <p>IGC Ready grades your actual written and scenario answers against the current GIC1/GIC2 syllabus — not just multiple choice.</p>
+          <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="btn btn-primary" target="_blank" rel="noopener">Try 3 free corrections →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ FAQ ============ -->
-  <section class="section-pad" id="faq">
+  <section class="section-pad alt" id="faq">
     <div class="wrap">
       <div class="section-head">
-        <h2>FAQ: NEBOSH IGC Expiration and Validity</h2>
+        <h2>FAQ: NEBOSH IGC expiration and validity</h2>
       </div>
       <div class="faq-list">
         <details>
           <summary>Can I still put NEBOSH IGC on my CV if I passed it 10 years ago?</summary>
-          <p class="faq-answer">Yes, absolutely. Your qualification never expires, and employers recognize it indefinitely. However, pair it with evidence of continuous professional experience or additional qualifications to demonstrate current competence.</p>
+          <p class="faq-answer">Yes. Your qualification never expires, and employers recognize it indefinitely. It's still worth pairing it with evidence of continuous professional experience or additional qualifications to show current competence.</p>
         </details>
         <details>
           <summary>Do I need to take a refresher course after a certain number of years?</summary>
-          <p class="faq-answer">No, NEBOSH does not mandate refresher training. However, if you've been away from HSE work for many years, a refresher course is <em>advisable</em> to update your knowledge of regulatory changes.</p>
+          <p class="faq-answer">NEBOSH doesn't mandate one. But if you've been away from HSE work for many years, a refresher is genuinely useful for catching up on regulatory changes — worth doing even though it's not required.</p>
         </details>
         <details>
           <summary>Does my NEBOSH IGC need periodic renewal, like some other certifications do?</summary>
@@ -577,28 +227,28 @@
         </details>
         <details>
           <summary>If I haven't worked in HSE for 5 years, is my NEBOSH IGC still valid?</summary>
-          <p class="faq-answer">Officially, yes—your certification is still valid. However, employers may question your current knowledge. Consider taking a refresher or pursuing a complementary qualification to demonstrate your commitment to staying current.</p>
+          <p class="faq-answer">Officially, yes. Employers may still question how current your knowledge is, though — a refresher or a complementary qualification can help demonstrate you've kept up.</p>
         </details>
         <details>
           <summary>Will my NEBOSH IGC be outdated if HSE regulations change?</summary>
-          <p class="faq-answer">Your qualification itself doesn't become invalid, but your knowledge might be incomplete. NEBOSH IGC covers core HSE principles that remain relevant. For regulatory updates, follow guidance from the HSE website or take sector-specific training.</p>
+          <p class="faq-answer">The qualification itself doesn't become invalid, but your knowledge of specific regulations might lag. The core principles the IGC covers stay relevant — for regulatory updates specifically, HSE guidance or sector-specific training fills the gap.</p>
         </details>
         <details>
           <summary>Do I need the Diploma if I already have the IGC?</summary>
-          <p class="faq-answer">No, the Diploma is not mandatory. However, if you want to advance your career or demonstrate deeper expertise, the Diploma is valuable. The IGC alone is sufficient for many HSE roles.</p>
+          <p class="faq-answer">No, it's not required. The IGC is sufficient for many HSE roles on its own. The Diploma is worth pursuing if you want to advance into more senior or specialized positions.</p>
         </details>
         <details>
           <summary>Can employers reject my NEBOSH IGC because it's too old?</summary>
-          <p class="faq-answer">Technically, no—the qualification is officially recognized indefinitely. However, employers can require evidence of current competence. If that's a concern, document your continuous professional development or pursue an advanced qualification.</p>
+          <p class="faq-answer">Not on the basis of the qualification itself — it's recognized indefinitely. Employers can still ask for evidence of current competence, which is where documenting CPD or pursuing an advanced qualification helps.</p>
         </details>
         <details>
           <summary>Is the NEBOSH IGC recognized internationally if I haven't renewed it?</summary>
-          <p class="faq-answer">Yes. The NEBOSH IGC is recognized globally without any renewal requirement. It's accepted in the UK, Middle East, Asia, Australia, and many other regions.</p>
+          <p class="faq-answer">Yes — recognized globally with no renewal requirement, across the UK, Middle East, Asia, Australia, and beyond.</p>
         </details>
       </div>
 
       <div class="author-box">
-        <img src="../../images/attila-headshot-round.png" alt="Attila Young, HSE consultant" width="64" height="64" loading="lazy">
+        <img src="/images/attila-headshot-round.png" alt="Attila Young, HSE consultant" width="56" height="56" loading="lazy">
         <div>
           <h3>Attila Young</h3>
           <p>Freelance HSE consultant, MASE certified, currently preparing for the NEBOSH IGC himself. <a href="/#about">More about the creator →</a></p>
