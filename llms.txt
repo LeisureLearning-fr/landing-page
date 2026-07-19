@@ -1,0 +1,16 @@
+# IGC Ready
+
+> IGC Ready is a NEBOSH International General Certificate (IGC) revision tool for the current GIC1/GIC2 syllabus, built by a practicing HSE consultant. It offers adaptive practice questions, AI-graded open and scenario answers, and a syllabus-mapped progress tracker.
+
+IGC Ready is an independent study tool. It is not affiliated with, endorsed by, or sponsored by NEBOSH. NEBOSH® is a registered trademark of the National Examination Board in Occupational Safety and Health.
+
+## Product
+
+- [Home](https://www.igc-leisurelearning.com/): Overview of the IGC Ready practice tool, pricing, and free trial corrections.
+
+## Blog
+
+- [Best Tools to Revise for the NEBOSH IGC in 2026](https://www.igc-leisurelearning.com/blog/best-nebosh-igc-revision-tools/): Comparison of flashcard apps, PDF guides, course platforms, and adaptive practice tools for the current GIC1/GIC2 syllabus.
+- [Inside the NEBOSH GIC1 Exam](https://www.igc-leisurelearning.com/blog/nebosh-gic1-exam-format-explained/): What the 24-hour open-book GIC1 exam format actually involves, including the closing interview.
+- [NEBOSH IGC 2026 Syllabus Update](https://www.igc-leisurelearning.com/blog/nebosh-igc-2026-syllabus-changes/): What changed when IG1/IG2 became GIC1/GIC2, including submission, marking, and results.
+- [Does the NEBOSH IGC Expire?](https://www.igc-leisurelearning.com/blog/nebosh-igc-expire/): Certification validity, renewal rules, and how to keep the qualification competitive over time.
