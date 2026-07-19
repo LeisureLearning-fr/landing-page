@@ -407,6 +407,104 @@
     color: var(--ink-soft);
   }
 
+  /* ---------- try-it demo ---------- */
+  .demo-card{
+    max-width: 620px;
+    margin: 0 auto;
+    background: var(--panel);
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    padding: 26px 24px;
+  }
+  .demo-tabs{
+    display:flex;
+    gap: 8px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .demo-tab{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.5em 0.9em;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: var(--paper);
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .demo-tab.is-active{
+    border-color: var(--ink);
+    background: var(--safety);
+    color: var(--ink);
+  }
+  .demo-tab:disabled{ opacity: 0.5; cursor: not-allowed; }
+
+  .demo-question{
+    font-weight: 600;
+    white-space: pre-line;
+    margin-bottom: 14px;
+  }
+
+  .demo-textarea{
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    padding: 0.85em 1em;
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+    resize: vertical;
+    margin-bottom: 14px;
+  }
+  .demo-textarea:focus-visible{ outline: 3px solid var(--safety-deep); outline-offset: 1px; }
+  .demo-textarea:disabled{ opacity: 0.6; }
+
+  .demo-actions{
+    display:flex;
+    align-items:center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .demo-counter{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  .demo-result{
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--line);
+  }
+  .demo-score{
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+  }
+  .demo-feedback{
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  .demo-error{
+    color: var(--danger);
+    font-size: 0.92rem;
+  }
+
+  .demo-locked{
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 2px solid var(--ink);
+    text-align:center;
+  }
+  .demo-locked p{ color: var(--ink-soft); margin-bottom: 14px; }
+
   /* ---------- pricing ---------- */
   .pricing-wrap{ display:flex; justify-content:center; }
   .pricing-card{
@@ -805,6 +903,41 @@
     </div>
   </section>
 
+  <!-- ============ TRY IT (DEMO) ============ -->
+  <section class="section-pad alt" id="demo">
+    <div class="wrap">
+      <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center;">
+        <span class="tag tag-safety">Try it — no signup</span>
+        <h2 style="margin-top:14px;">See the feedback for yourself. 3 free corrections.</h2>
+        <p>Pick a question, write a real answer, and get the same kind of detailed marking you'd get inside the full tool.</p>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-tabs" role="tablist" aria-label="Demo question difficulty">
+          <button class="demo-tab is-active" data-qid="narrow" type="button">Narrow</button>
+          <button class="demo-tab" data-qid="broad" type="button">Broad</button>
+          <button class="demo-tab" data-qid="exam" type="button">Exam level</button>
+        </div>
+
+        <p class="demo-question" id="demo-question-text">Loading…</p>
+
+        <textarea id="demo-answer" class="demo-textarea" rows="6" placeholder="Write your answer here…" maxlength="3000"></textarea>
+
+        <div class="demo-actions">
+          <button id="demo-submit" class="btn btn-primary" type="button">Grade my answer →</button>
+          <span class="demo-counter" id="demo-counter">3 free corrections left</span>
+        </div>
+
+        <div id="demo-result" class="demo-result" hidden></div>
+
+        <div id="demo-locked" class="demo-locked" hidden>
+          <p><strong>That's your 3 free corrections.</strong> That's the same feedback engine behind every question in the full tool — adaptive, mapped to your weak syllabus elements, with 6 months of unlimited use.</p>
+          <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="btn btn-primary" target="_blank" rel="noopener">See IGC Ready pricing →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ PRICING ============ -->
   <section class="section-pad" id="pricing">
     <div class="wrap">
@@ -877,6 +1010,113 @@
     <p class="footer-signature">© 2026 IGC Ready · Built by an HSE consultant, for HSE candidates.</p>
   </div>
 </footer>
+
+<script>
+(function(){
+  var DEMO_Q = {
+    narrow: "Explain the purpose of the 'Check' stage in a health and safety management system based on the Plan-Do-Check-Act cycle.\n\nInclude points on:\n• Monitoring and measuring performance\n• How organisations find out if controls are working\n• Link to review and corrective action",
+    broad: "Explain how an organisation can assess the current state of its safety culture and then take steps to improve it.",
+    exam: "Outline EIGHT organisational factors that can influence human reliability in the workplace."
+  };
+
+  var tabs = document.querySelectorAll('.demo-tab');
+  var qText = document.getElementById('demo-question-text');
+  var answerEl = document.getElementById('demo-answer');
+  var submitBtn = document.getElementById('demo-submit');
+  var counterEl = document.getElementById('demo-counter');
+  var resultEl = document.getElementById('demo-result');
+  var lockedEl = document.getElementById('demo-locked');
+  var currentQ = 'narrow';
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, function(c){
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  function usesLeft(){
+    var v = parseInt(localStorage.getItem('igcDemoUsesLeft'), 10);
+    return isNaN(v) ? 3 : v;
+  }
+  function setUsesLeft(n){
+    localStorage.setItem('igcDemoUsesLeft', String(n));
+    counterEl.textContent = n > 0 ? (n + ' free correction' + (n === 1 ? '' : 's') + ' left') : 'No free corrections left';
+    if (n <= 0) lockDemo();
+  }
+  function lockDemo(){
+    submitBtn.disabled = true;
+    answerEl.disabled = true;
+    tabs.forEach(function(t){ t.disabled = true; });
+    lockedEl.hidden = false;
+  }
+
+  function selectQuestion(qid){
+    currentQ = qid;
+    qText.textContent = DEMO_Q[qid];
+    tabs.forEach(function(t){ t.classList.toggle('is-active', t.dataset.qid === qid); });
+    resultEl.hidden = true;
+    resultEl.innerHTML = '';
+    answerEl.value = '';
+  }
+
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ selectQuestion(t.dataset.qid); });
+  });
+
+  submitBtn.addEventListener('click', function(){
+    var answer = answerEl.value.trim();
+    if (!answer){ answerEl.focus(); return; }
+    if (usesLeft() <= 0){ lockDemo(); return; }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Grading…';
+    resultEl.hidden = true;
+
+    fetch('/api/grade-demo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ questionId: currentQ, answer: answer })
+    })
+    .then(function(r){ return r.json().then(function(data){ return { ok: r.ok, data: data }; }); })
+    .then(function(res){
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Grade my answer →';
+
+      if (!res.ok){
+        resultEl.hidden = false;
+        resultEl.innerHTML = '<p class="demo-error">' + escapeHtml(res.data.error || 'Something went wrong — please try again.') + '</p>';
+        return;
+      }
+
+      var d = res.data;
+      var coveredHtml = (d.points_covered || []).map(function(p){
+        return '<li><span class="price-check">✓</span><span>' + escapeHtml(p) + '</span></li>';
+      }).join('');
+      var missedHtml = (d.points_missed || []).map(function(p){
+        return '<li><span class="diff-mark" style="color:var(--danger);">✕</span><span>' + escapeHtml(p) + '</span></li>';
+      }).join('');
+
+      resultEl.hidden = false;
+      resultEl.innerHTML =
+        '<p class="demo-score">' + escapeHtml(d.marks_awarded) + ' / ' + escapeHtml(d.marks_total) + '</p>' +
+        (coveredHtml ? '<ul class="price-includes">' + coveredHtml + '</ul>' : '') +
+        (missedHtml ? '<ul class="price-includes">' + missedHtml + '</ul>' : '') +
+        '<p class="demo-feedback">' + escapeHtml(d.feedback || '') + '</p>';
+
+      setUsesLeft(usesLeft() - 1);
+    })
+    .catch(function(){
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Grade my answer →';
+      resultEl.hidden = false;
+      resultEl.innerHTML = '<p class="demo-error">Connection issue — please try again.</p>';
+    });
+  });
+
+  selectQuestion('narrow');
+  setUsesLeft(usesLeft());
+})();
+</script>
 
 </body>
 </html>
