@@ -407,6 +407,46 @@
     color: var(--ink-soft);
   }
 
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .about-photo-wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap: 8px;
+  }
+  .about-avatar{
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 30%;
+    border: 3px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--safety);
+  }
+  .about-name{
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin: 6px 0 0;
+  }
+  .about-role{
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .about-text h2{ font-size: clamp(1.4rem, 2.6vw + 0.6rem, 1.9rem); margin-top: 14px; }
+  .about-text p{ color: var(--ink-soft); }
+
   /* ---------- try-it demo ---------- */
   .demo-card{
     max-width: 620px;
@@ -670,6 +710,8 @@
   @media (min-width: 980px){
     .hero-grid{ grid-template-columns: 1.05fr 0.95fr; gap: 56px; }
     .origin-grid{ grid-template-columns: 1.1fr 0.9fr; gap: 48px; }
+    .about-grid{ grid-template-columns: 0.55fr 1.45fr; gap: 48px; }
+    .about-photo-wrap{ align-items: flex-start; text-align: left; }
     .hero-cta-row{ flex-direction: row; align-items:center; }
     .field-row{ flex-direction: row; }
     .field-row input[type="email"]{ flex:1; }
@@ -933,6 +975,26 @@
         <div id="demo-locked" class="demo-locked" hidden>
           <p><strong>That's your 3 free corrections.</strong> That's the same feedback engine behind every question in the full tool — adaptive, mapped to your weak syllabus elements, with 6 months of unlimited use.</p>
           <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="btn btn-primary" target="_blank" rel="noopener">See IGC Ready pricing →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section-pad alt" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-photo-wrap">
+          <img src="images/attila-headshot-round.png" alt="Attila Young, HSE consultant and creator of IGC Ready" class="about-avatar" width="160" height="160" loading="lazy">
+          <p class="about-name">Attila Young</p>
+          <p class="about-role">HSE Consultant · France</p>
+        </div>
+        <div class="about-text">
+          <span class="tag">About the creator</span>
+          <h2>Built by someone who's sat where you're sitting</h2>
+          <p>I started my HSE career on industrial sites, then spent most of my early years in construction — building up my knowledge permit by permit, site by site.</p>
+          <p>A real turning point came when I got the chance to work on an international project. Safety stopped being just about local regulations and became about building a common language across cultures and standards. That's what pushed me to sit the NEBOSH IGC myself — for the deeper technical grounding, and for the international recognition to keep taking on missions like that one.</p>
+          <p>Outside of work, I'm a committed course-taker — languages, new skills, sport, you name it. Some of that training was genuinely dull. But it taught me exactly what makes revision actually work and what makes people switch off — and that's the thinking behind every question in this tool.</p>
         </div>
       </div>
     </div>
