@@ -278,6 +278,25 @@ section{ scroll-margin-top: 64px; }
 }
 .callout strong{ color: var(--ink); }
 
+.term-list{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin: 1.6em 0;
+}
+.term-list dt{
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--safety-deep);
+  margin-top: 14px;
+}
+.term-list dt:first-child{ margin-top:0; }
+.term-list dd{
+  margin: 4px 0 0;
+  color: var(--ink);
+}
+
 .post-cta{
   margin-top: 44px;
   background: var(--panel);
