@@ -157,7 +157,25 @@
   }
   .btn-primary:hover{ box-shadow: 6px 6px 0 var(--ink); }
 
+  .btn-outline{
+    background: transparent;
+    color: var(--ink);
+  }
+  .btn-outline:hover{
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: none;
+  }
+
   .btn-full{ width: 100%; }
+
+  /* Primary + secondary CTA side by side on desktop, stacked on mobile.
+     Reuses the same breakpoint as .hero-cta-row below for consistency. */
+  .cta-pair{
+    display:flex;
+    flex-direction: column;
+    gap: 14px;
+  }
 
   /* ---------- header ---------- */
   .site-header{
@@ -202,6 +220,17 @@
     border-bottom: 2px solid var(--safety);
     padding-bottom: 2px;
   }
+  .header-ctas{ display:flex; align-items:center; gap: 18px; }
+  .header-cta-secondary{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--ink-soft);
+    border-bottom: 2px dashed var(--ink-soft);
+    padding-bottom: 2px;
+  }
+  .header-cta-secondary:hover{ color: var(--ink); border-bottom-color: var(--ink); }
 
   /* ---------- hero ---------- */
   .hero{ padding: 48px 0 40px; background: var(--panel); border-bottom: 1px solid var(--line); }
@@ -715,6 +744,7 @@
     .about-grid{ grid-template-columns: 0.55fr 1.45fr; gap: 48px; }
     .about-photo-wrap{ align-items: flex-start; text-align: left; }
     .hero-cta-row{ flex-direction: row; align-items:center; }
+    .cta-pair{ flex-direction: row; align-items:center; flex-wrap: wrap; }
     .field-row{ flex-direction: row; }
     .field-row input[type="email"]{ flex:1; }
     .field-row button{ flex-shrink:0; }
@@ -784,7 +814,10 @@
   <div class="wrap">
     <a href="#top" class="brand">[ IGC<span>READY</span> ]</a>
     <nav class="header-nav"><a href="/blog/" class="nav-link">Blog</a></nav>
-    <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="header-cta" target="_blank" rel="noopener">Join now →</a>
+    <div class="header-ctas">
+      <a href="#demo" class="header-cta-secondary">Try it!</a>
+      <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="header-cta" target="_blank" rel="noopener">Join now →</a>
+    </div>
   </div>
 </header>
 
@@ -801,6 +834,7 @@
         <p class="lede">Adaptive practice, open questions marked with detailed feedback, and a scenario mode built to match the real GIC1 exam format. Fully rebuilt for the current 2026 GIC1/GIC2 syllabus — not the retired IG1/IG2 format still floating around online.</p>
         <div class="hero-cta-row">
           <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="btn btn-primary" target="_blank" rel="noopener">Join now !</a>
+          <a href="#demo" class="btn btn-outline">Try it!</a>
         </div>
         <p class="trust-line" style="margin-top:18px;">Built by an <strong>HSE consultant</strong> currently preparing for the same exam — not a course platform, a study tool made from the inside.</p>
       </div>
@@ -935,8 +969,7 @@
     <div class="wrap">
       <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center;">
         <span class="tag tag-safety">Try it — no signup</span>
-        <h2 style="margin-top:14px;">See the feedback for yourself. Free interactive demo.</h2>
-        <p>5 MCQs, 4 adaptive open questions, a full GIC1 case study, and every flashcard — free, no signup. Opens in the actual tool.</p>
+        <h2 style="margin-top:14px;">Try studying with instant feedback. Free interactive demo.</h2>
       </div>
 
       <div class="demo-card" style="text-align:center;">
@@ -992,7 +1025,10 @@
 
           <p class="price-frame">Pay once, revise until your exam date. Nothing renews, nothing to remember to cancel — six months is usually more runway than most candidates need.</p>
 
-          <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="btn btn-primary btn-full" target="_blank" rel="noopener">Join now !</a>
+          <div class="cta-pair">
+            <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="btn btn-primary btn-full" target="_blank" rel="noopener">Join now !</a>
+            <a href="#demo" class="btn btn-outline btn-full">Try it!</a>
+          </div>
           <p class="price-micro">Waitlist members get first access, and the $35 rate is locked in before any public price increase.</p>
         </div>
       </div>
