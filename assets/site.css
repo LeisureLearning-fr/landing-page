@@ -108,7 +108,28 @@ section{ scroll-margin-top: 64px; }
   box-shadow: 4px 4px 0 var(--ink);
 }
 .btn-primary:hover{ box-shadow: 6px 6px 0 var(--ink); }
+
+.btn-outline{
+  background: transparent;
+  color: var(--ink);
+}
+.btn-outline:hover{
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: none;
+}
+
 .btn-full{ width: 100%; }
+
+/* Primary + secondary CTA side by side on desktop, stacked on mobile. */
+.cta-pair{
+  display:flex;
+  flex-direction: column;
+  gap: 14px;
+}
+@media (min-width: 980px){
+  .cta-pair{ flex-direction: row; align-items:center; flex-wrap: wrap; }
+}
 
 .site-header{
   position: sticky;
