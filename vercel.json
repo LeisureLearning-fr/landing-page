@@ -2,6 +2,9 @@
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap" }
   ],
+  "redirects": [
+    { "source": "/blog/best-nebosh-igc-revision-tools/(.*)", "destination": "/blog/how-long-to-pass-nebosh-igc/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",
