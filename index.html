@@ -214,6 +214,8 @@
     color: var(--ink-soft);
   }
   .nav-link:hover{ color: var(--ink); }
+  .nav-link.lang-flag{ font-size: 1.05rem; line-height: 1; letter-spacing: normal; opacity: 0.8; }
+  .nav-link.lang-flag:hover{ opacity: 1; }
   .header-cta{
     font-family: var(--font-mono);
     font-size: 0.78rem;
@@ -839,7 +841,7 @@
 <header class="site-header">
   <div class="wrap">
     <a href="#top" class="brand">[ IGC<span>READY</span> ]</a>
-    <nav class="header-nav"><a href="/blog/" class="nav-link">Blog</a><a href="/fr/" class="nav-link" hreflang="fr" rel="alternate">FR</a></nav>
+    <nav class="header-nav"><a href="/blog/" class="nav-link">Blog</a><a href="/fr/" class="nav-link lang-flag" hreflang="fr" rel="alternate" aria-label="Français" title="Français">🇫🇷</a></nav>
     <div class="header-ctas">
       <a href="#demo" class="header-cta-secondary">Try it!</a>
       <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="header-cta" target="_blank" rel="noopener">Join now →</a>
