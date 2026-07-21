@@ -17,11 +17,18 @@ function collectRoutes() {
   const blogDir = path.join(process.cwd(), "blog");
   const rootIndex = path.join(process.cwd(), "index.html");
   const blogIndex = path.join(blogDir, "index.html");
+  const frIndex = path.join(process.cwd(), "fr", "index.html");
+  const frBlogDir = path.join(process.cwd(), "fr", "blog");
+  const frBlogIndex = path.join(frBlogDir, "index.html");
 
   const routes = [
     { loc: "/", file: rootIndex, changefreq: "weekly", priority: "1.0" },
     { loc: "/blog/", file: blogIndex, changefreq: "weekly", priority: "0.8" },
   ];
+
+  if (fs.existsSync(frIndex)) {
+    routes.push({ loc: "/fr/", file: frIndex, changefreq: "weekly", priority: "1.0" });
+  }
 
   const entries = fs.readdirSync(blogDir, { withFileTypes: true });
   for (const entry of entries) {
@@ -34,6 +41,24 @@ function collectRoutes() {
       changefreq: "monthly",
       priority: "0.6",
     });
+  }
+
+  // French blog posts — picked up automatically once fr/blog/<slug>/index.html
+  // pages exist (see the still-pending blog translation pass).
+  if (fs.existsSync(frBlogIndex)) {
+    routes.push({ loc: "/fr/blog/", file: frBlogIndex, changefreq: "weekly", priority: "0.8" });
+    const frEntries = fs.readdirSync(frBlogDir, { withFileTypes: true });
+    for (const entry of frEntries) {
+      if (!entry.isDirectory()) continue;
+      const postIndex = path.join(frBlogDir, entry.name, "index.html");
+      if (!fs.existsSync(postIndex)) continue;
+      routes.push({
+        loc: `/fr/blog/${entry.name}/`,
+        file: postIndex,
+        changefreq: "monthly",
+        priority: "0.6",
+      });
+    }
   }
 
   return routes;
