@@ -921,8 +921,9 @@
           <textarea class="q-answer demo-textarea" rows="4" data-marks="3" placeholder="Write your answer here. Aim for roughly one clear point per mark."></textarea>
           <div class="demo-actions" style="justify-content:space-between;">
             <span class="q-counter demo-counter">0 words · 3 marks</span>
-            <a href="#demo" class="btn btn-outline">Try it for real →</a>
+            <button class="q-submit btn btn-primary" type="button" data-qid="mode2_guided">Mark my answer →</button>
           </div>
+          <div class="q-result demo-result" hidden></div>
         </div>
 
         <div class="q-level-panel" data-level="1" hidden>
@@ -941,8 +942,9 @@
           <textarea class="q-answer demo-textarea" rows="4" data-marks="3" placeholder="Write your answer here. Aim for roughly one clear point per mark."></textarea>
           <div class="demo-actions" style="justify-content:space-between;">
             <span class="q-counter demo-counter">0 words · 3 marks</span>
-            <a href="#demo" class="btn btn-outline">Try it for real →</a>
+            <button class="q-submit btn btn-primary" type="button" data-qid="mode2_narrow">Mark my answer →</button>
           </div>
+          <div class="q-result demo-result" hidden></div>
         </div>
 
         <div class="q-level-panel" data-level="2" hidden>
@@ -954,8 +956,9 @@
           <textarea class="q-answer demo-textarea" rows="4" data-marks="6" placeholder="Write your answer here. Aim for roughly one clear point per mark."></textarea>
           <div class="demo-actions" style="justify-content:space-between;">
             <span class="q-counter demo-counter">0 words · 6 marks</span>
-            <a href="#demo" class="btn btn-outline">Try it for real →</a>
+            <button class="q-submit btn btn-primary" type="button" data-qid="mode2_broad">Mark my answer →</button>
           </div>
+          <div class="q-result demo-result" hidden></div>
         </div>
 
         <div class="q-level-panel" data-level="3" hidden>
@@ -967,8 +970,17 @@
           <textarea class="q-answer demo-textarea" rows="4" data-marks="8" placeholder="Write your answer here. Aim for roughly one clear point per mark."></textarea>
           <div class="demo-actions" style="justify-content:space-between;">
             <span class="q-counter demo-counter">0 words · 8 marks</span>
-            <a href="#demo" class="btn btn-outline">Try it for real →</a>
+            <button class="q-submit btn btn-primary" type="button" data-qid="mode2_exam">Mark my answer →</button>
           </div>
+          <div class="q-result demo-result" hidden></div>
+        </div>
+
+        <div class="demo-actions" style="justify-content:center;margin-top:6px;">
+          <span id="mode2-counter" class="demo-counter">4 free corrections left</span>
+        </div>
+        <div id="mode2-locked" class="demo-locked" hidden>
+          <p><strong>That's your 4 free corrections.</strong> That's the same feedback engine behind every question in the full tool — adaptive, mapped to your weak syllabus elements, with 6 months of unlimited use.</p>
+          <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="btn btn-primary" target="_blank" rel="noopener">See IGC Ready pricing →</a>
         </div>
       </div>
     </div>
@@ -1251,6 +1263,93 @@
       counter.textContent = words + ' words · ' + marks + ' marks';
     });
   });
+
+  // ── Real grading via /api/grade-demo (same endpoint the pricing-section
+  //    demo used to use) — a shared, localStorage-backed free-uses counter
+  //    across all 4 questions, separate key from any other demo widget. ──
+  var FREE_USES = 4;
+  var STORAGE_KEY = 'igcMode2UsesLeft';
+  var usesCounterEl = document.getElementById('mode2-counter');
+  var lockedEl = document.getElementById('mode2-locked');
+  var submitBtns = document.querySelectorAll('.q-submit');
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function usesLeft() {
+    var v = parseInt(localStorage.getItem(STORAGE_KEY), 10);
+    return isNaN(v) ? FREE_USES : v;
+  }
+  function setUsesLeft(n) {
+    localStorage.setItem(STORAGE_KEY, String(n));
+    if (usesCounterEl) usesCounterEl.textContent = n > 0 ? (n + ' free correction' + (n === 1 ? '' : 's') + ' left') : 'No free corrections left';
+    if (n <= 0) lockAll();
+  }
+  function lockAll() {
+    submitBtns.forEach(function (b) { b.disabled = true; });
+    document.querySelectorAll('.q-answer').forEach(function (ta) { ta.disabled = true; });
+    if (lockedEl) lockedEl.hidden = false;
+  }
+
+  submitBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (usesLeft() <= 0) { lockAll(); return; }
+      var panel = btn.closest('.q-level-panel');
+      var textarea = panel.querySelector('.q-answer');
+      var resultEl = panel.querySelector('.q-result');
+      var answer = textarea.value.trim();
+      if (!answer) { textarea.focus(); return; }
+
+      var originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Grading…';
+      resultEl.hidden = true;
+
+      fetch('/api/grade-demo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ questionId: btn.getAttribute('data-qid'), answer: answer })
+      })
+        .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+        .then(function (res) {
+          btn.disabled = false;
+          btn.textContent = originalText;
+
+          if (!res.ok) {
+            resultEl.hidden = false;
+            resultEl.innerHTML = '<p class="demo-error">' + escapeHtml(res.data.error || 'Something went wrong — please try again.') + '</p>';
+            return;
+          }
+
+          var d = res.data;
+          var coveredHtml = (d.points_covered || []).map(function (p) {
+            return '<li><span class="price-check">✓</span><span>' + escapeHtml(p) + '</span></li>';
+          }).join('');
+          var missedHtml = (d.points_missed || []).map(function (p) {
+            return '<li><span class="diff-mark" style="color:var(--danger);">✕</span><span>' + escapeHtml(p) + '</span></li>';
+          }).join('');
+
+          resultEl.hidden = false;
+          resultEl.innerHTML =
+            '<p class="demo-score">' + escapeHtml(d.marks_awarded) + ' / ' + escapeHtml(d.marks_total) + '</p>' +
+            (coveredHtml ? '<ul class="price-includes">' + coveredHtml + '</ul>' : '') +
+            (missedHtml ? '<ul class="price-includes">' + missedHtml + '</ul>' : '') +
+            '<p class="demo-feedback">' + escapeHtml(d.feedback || '') + '</p>';
+
+          setUsesLeft(usesLeft() - 1);
+        })
+        .catch(function () {
+          btn.disabled = false;
+          btn.textContent = originalText;
+          resultEl.hidden = false;
+          resultEl.innerHTML = '<p class="demo-error">Connection issue — please try again.</p>';
+        });
+    });
+  });
+
+  setUsesLeft(usesLeft());
 })();
 </script>
 

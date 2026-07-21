@@ -1,5 +1,5 @@
 // api/grade-demo.js
-// Vercel serverless function — grades the 3 fixed demo questions using the
+// Vercel serverless function — grades the fixed demo questions using the
 // Claude API. The API key lives only in Vercel's environment variables
 // (Project → Settings → Environment Variables → ANTHROPIC_API_KEY),
 // never in this file or in the browser.
@@ -58,13 +58,72 @@ Key points — candidate should identify and briefly outline (not just list) any
 - Organisational change or restructuring (uncertainty, unfamiliar processes increasing error risk).
 - Industrial relations / relationship between workforce and management.
 Suggested scale: mark out of 16 — up to 2 marks per factor (1 for correctly identifying it, 1 for a genuine brief outline rather than just naming it), capped at 8 factors.`.trim()
+  },
+  // The 4 below back the "real Mode 2 questions" preview block at the very
+  // top of the landing page (one per difficulty level) — separate ids from
+  // the 3 above so the two widgets' answer counts never collide.
+  mode2_guided: {
+    label: "Guided — permit-to-work cancellation",
+    text: "Explain the purpose of the 'cancellation' stage in a permit-to-work system.",
+    marksTotal: 3,
+    criteria: `
+Key points a strong answer should cover:
+- Cancellation formally closes/ends the permit once the work is fully completed.
+- Identifies checks made before cancelling: work area left in a safe condition, tools/equipment and people removed, isolations reinstated / normal conditions restored.
+- Identifies who is responsible: typically the person in charge of the work confirms completion, and the permit issuer/authorised person formally cancels and signs it off.
+- States that cancellation confirms the plant/area is safe to return to normal operation or for further work to proceed.
+Suggested scale: mark out of 3, roughly one point per distinct idea above (max 3).`.trim()
+  },
+  mode2_narrow: {
+    label: "Narrow — lagging indicators",
+    text: "Give THREE examples of lagging performance indicators that an organisation could use to monitor its health and safety performance.",
+    marksTotal: 3,
+    criteria: `
+Candidate should give any THREE distinct lagging (reactive) indicators — i.e. measures that record events that have already happened. Valid examples include:
+- Number/rate of accidents or injuries (e.g. RIDDOR-reportable injuries).
+- Lost time incidents / days lost due to work-related injury or ill health.
+- Enforcement actions (improvement/prohibition notices) or prosecutions.
+- Near misses or dangerous occurrences reported after the fact.
+- Sickness absence rates linked to work.
+- Compensation claims.
+Suggested scale: 1 mark per valid distinct example (max 3). An example that is actually a leading/proactive indicator (e.g. number of audits completed, training sessions delivered) should not be credited.`.trim()
+  },
+  mode2_broad: {
+    label: "Broad — worker involvement",
+    text: "Explain the importance of worker involvement in health and safety management within a workplace.",
+    marksTotal: 6,
+    criteria: `
+Key points a strong answer should explain (not just list):
+- Workers have first-hand knowledge of hazards/risks in their own tasks, improving the accuracy and practicality of risk assessments and controls.
+- Increases ownership of and buy-in to safety rules, making genuine compliance more likely than rules imposed top-down.
+- Improves communication and trust between management and the workforce.
+- Encourages open reporting of hazards, near misses and incidents without fear of blame.
+- Reflects a legal expectation in many jurisdictions to consult workers (e.g. via safety representatives/committees).
+- Draws on collective workforce experience to find practical, workable solutions rather than ones that look good on paper but fail in practice.
+Suggested scale: mark out of 6, roughly one point per distinct idea that is actually explained (the "why it matters"), not just named (max 6).`.trim()
+  },
+  mode2_exam: {
+    label: "Exam-level — benefits of involving workers",
+    text: "Outline the benefits to an organisation of involving workers in health and safety decision-making.",
+    marksTotal: 8,
+    criteria: `
+Candidate should outline (brief indication is enough at this level) any of the following organisational benefits:
+- Better-quality, more practical risk assessments and controls informed by real workplace knowledge.
+- Higher genuine compliance because workers understand and agree with rules they helped shape.
+- Improved reporting culture — more hazards/near misses reported early, before they become incidents.
+- Reduced accident and ill-health rates, and the associated costs (compensation, lost time, insurance premiums).
+- Better employee morale, engagement and retention.
+- Stronger legal compliance and demonstrates due diligence to regulators.
+- Smoother implementation of change (new equipment, procedures) due to workforce buy-in.
+- Enhanced organisational reputation with clients, regulators and the public.
+Suggested scale: mark out of 8, roughly one point per distinct benefit outlined (max 8) — a brief indication of each is enough for full marks at this level, full development is not required.`.trim()
   }
 };
 
 const SYSTEM_INSTRUCTIONS = `
 You are grading a candidate's answer to a NEBOSH IGC-style health and safety question, for a free interactive demo of an exam-prep tool. Your tone is direct, encouraging and professional — like a supportive tutor, not harsh, not vague praise either.
 
-Below are the three demo questions and their marking criteria. Only grade the ONE question specified in the user's message, using its own criteria — ignore the other two.
+Below are the demo questions and their marking criteria. Only grade the ONE question specified in the user's message, using its own criteria — ignore all the others.
 
 ${Object.entries(DEMO_QUESTIONS).map(([id, q]) => `--- Question "${id}": ${q.text}\n${q.criteria}`).join('\n\n')}
 
