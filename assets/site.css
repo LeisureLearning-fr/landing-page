@@ -167,8 +167,9 @@ section{ scroll-margin-top: 64px; }
 }
 .nav-link:hover,
 .nav-link[aria-current="page"]{ color: var(--ink); }
-.nav-link.lang-flag{ font-size: 1.05rem; line-height: 1; letter-spacing: normal; opacity: 0.8; }
+.nav-link.lang-flag{ display:inline-flex; align-items:center; opacity: 0.8; }
 .nav-link.lang-flag:hover{ opacity: 1; }
+.nav-link.lang-flag svg{ display:block; border-radius: 2px; }
 .header-cta{
   font-family: var(--font-mono);
   font-size: 0.78rem;

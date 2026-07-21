@@ -193,8 +193,9 @@
     color: var(--ink-soft);
   }
   .nav-link:hover{ color: var(--ink); }
-  .nav-link.lang-flag{ font-size: 1.05rem; line-height: 1; letter-spacing: normal; opacity: 0.8; }
+  .nav-link.lang-flag{ display:inline-flex; align-items:center; opacity: 0.8; }
   .nav-link.lang-flag:hover{ opacity: 1; }
+  .nav-link.lang-flag svg{ display:block; border-radius: 2px; }
   .header-cta{
     font-family: var(--font-mono);
     font-size: 0.78rem;
@@ -820,7 +821,7 @@
 <header class="site-header">
   <div class="wrap">
     <a href="#top" class="brand">[ IGC<span>READY</span> ]</a>
-    <nav class="header-nav"><a href="/fr/blog/" class="nav-link">Blog</a><a href="/" class="nav-link lang-flag" hreflang="en" rel="alternate" aria-label="English" title="English">🇬🇧</a></nav>
+    <nav class="header-nav"><a href="/fr/blog/" class="nav-link">Blog</a><a href="/" class="nav-link lang-flag" hreflang="en" rel="alternate" aria-label="English" title="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="30" fill="#00247d"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#cf142b" stroke-width="6"/></svg></a></nav>
     <div class="header-ctas">
       <a href="#demo" class="header-cta-secondary">Essayer !</a>
       <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="header-cta" target="_blank" rel="noopener">Rejoindre →</a>
