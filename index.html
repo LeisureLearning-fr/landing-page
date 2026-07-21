@@ -529,6 +529,27 @@
     white-space: pre-line;
     margin-bottom: 14px;
   }
+  .q-hint{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--safety);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 4px;
+  }
+  .q-hint p{
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--safety-deep);
+    margin: 0 0 8px;
+  }
+  .q-hint ul{ margin: 0; padding-left: 1.1em; color: var(--ink-soft); font-size: 0.92rem; }
+  .q-hint li{ margin-bottom: 4px; }
+  .q-hint li:last-child{ margin-bottom: 0; }
+  .q-level-panel[hidden]{ display: none; }
 
   .demo-textarea{
     width: 100%;
@@ -866,6 +887,73 @@
 
 <main id="top">
 
+  <!-- ============ MODE 2 SAMPLE QUESTIONS ============ -->
+  <section class="section-pad" style="padding-top:32px;padding-bottom:12px;">
+    <div class="wrap">
+      <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center;max-width:640px;">
+        <span class="tag tag-safety">Real questions — Mode 2, adaptive open questions</span>
+        <h2 style="margin-top:14px;">Four difficulty levels. Real GIC1/GIC2 questions.</h2>
+        <p>One real example from each level of the adaptive open-question mode — exactly what you'll see inside the tool, not a mockup.</p>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-tabs" role="tablist" aria-label="Difficulty level examples">
+          <button class="demo-tab is-active" type="button" data-level="0">1. Guided</button>
+          <button class="demo-tab" type="button" data-level="1">2. Narrow</button>
+          <button class="demo-tab" type="button" data-level="2">3. Broad</button>
+          <button class="demo-tab" type="button" data-level="3">4. Exam-level</button>
+        </div>
+
+        <div class="q-level-panel" data-level="0">
+          <p style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-soft);margin:0 0 10px;">Level 1: Narrow question · with hints</p>
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <span class="tag tag-safety">Explain</span><span class="tag">3 marks</span>
+          </div>
+          <p class="demo-question">Explain the purpose of the 'cancellation' stage in a permit-to-work system.</p>
+          <div class="q-hint">
+            <p>Include points on</p>
+            <ul>
+              <li>What must be checked before the permit is cancelled?</li>
+              <li>Who has responsibility for cancelling the permit?</li>
+              <li>What does cancellation confirm?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="q-level-panel" data-level="1" hidden>
+          <p style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-soft);margin:0 0 10px;">Level 2: Specific question · one hint</p>
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <span class="tag tag-safety">Give</span><span class="tag">3 marks</span>
+          </div>
+          <p class="demo-question">Give THREE examples of lagging performance indicators that an organisation could use to monitor its health and safety performance.</p>
+          <div class="q-hint">
+            <p>Include points on</p>
+            <ul>
+              <li>Think about measures that record events that have already happened</li>
+              <li>Consider outcomes such as injuries, absences, or enforcement actions</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="q-level-panel" data-level="2" hidden>
+          <p style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-soft);margin:0 0 10px;">Level 3: Wider question · no hints</p>
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <span class="tag tag-safety">Explain</span><span class="tag">6 marks</span>
+          </div>
+          <p class="demo-question" style="margin-bottom:0;">Explain the importance of worker involvement in health and safety management within a workplace.</p>
+        </div>
+
+        <div class="q-level-panel" data-level="3" hidden>
+          <p style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-soft);margin:0 0 10px;">Level 4: Broad, exam-style · no hints</p>
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <span class="tag tag-safety">Outline</span><span class="tag">8 marks</span>
+          </div>
+          <p class="demo-question" style="margin-bottom:0;">Outline the benefits to an organisation of involving workers in health and safety decision-making.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="wrap hero-grid">
@@ -1121,6 +1209,20 @@
   </div>
 </footer>
 
+<script>
+(function () {
+  var tabs = document.querySelectorAll('.demo-tabs .demo-tab');
+  var panels = document.querySelectorAll('.q-level-panel');
+  if (!tabs.length || !panels.length) return;
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var lvl = tab.getAttribute('data-level');
+      tabs.forEach(function (t) { t.classList.toggle('is-active', t === tab); });
+      panels.forEach(function (p) { p.hidden = p.getAttribute('data-level') !== lvl; });
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
