@@ -918,6 +918,11 @@
               <li>What does cancellation confirm?</li>
             </ul>
           </div>
+          <textarea class="q-answer demo-textarea" rows="4" data-marks="3" placeholder="Write your answer here. Aim for roughly one clear point per mark."></textarea>
+          <div class="demo-actions" style="justify-content:space-between;">
+            <span class="q-counter demo-counter">0 words · 3 marks</span>
+            <a href="#demo" class="btn btn-outline">Try it for real →</a>
+          </div>
         </div>
 
         <div class="q-level-panel" data-level="1" hidden>
@@ -933,6 +938,11 @@
               <li>Consider outcomes such as injuries, absences, or enforcement actions</li>
             </ul>
           </div>
+          <textarea class="q-answer demo-textarea" rows="4" data-marks="3" placeholder="Write your answer here. Aim for roughly one clear point per mark."></textarea>
+          <div class="demo-actions" style="justify-content:space-between;">
+            <span class="q-counter demo-counter">0 words · 3 marks</span>
+            <a href="#demo" class="btn btn-outline">Try it for real →</a>
+          </div>
         </div>
 
         <div class="q-level-panel" data-level="2" hidden>
@@ -940,7 +950,12 @@
           <div style="display:flex;gap:8px;margin-bottom:10px;">
             <span class="tag tag-safety">Explain</span><span class="tag">6 marks</span>
           </div>
-          <p class="demo-question" style="margin-bottom:0;">Explain the importance of worker involvement in health and safety management within a workplace.</p>
+          <p class="demo-question">Explain the importance of worker involvement in health and safety management within a workplace.</p>
+          <textarea class="q-answer demo-textarea" rows="4" data-marks="6" placeholder="Write your answer here. Aim for roughly one clear point per mark."></textarea>
+          <div class="demo-actions" style="justify-content:space-between;">
+            <span class="q-counter demo-counter">0 words · 6 marks</span>
+            <a href="#demo" class="btn btn-outline">Try it for real →</a>
+          </div>
         </div>
 
         <div class="q-level-panel" data-level="3" hidden>
@@ -948,7 +963,12 @@
           <div style="display:flex;gap:8px;margin-bottom:10px;">
             <span class="tag tag-safety">Outline</span><span class="tag">8 marks</span>
           </div>
-          <p class="demo-question" style="margin-bottom:0;">Outline the benefits to an organisation of involving workers in health and safety decision-making.</p>
+          <p class="demo-question">Outline the benefits to an organisation of involving workers in health and safety decision-making.</p>
+          <textarea class="q-answer demo-textarea" rows="4" data-marks="8" placeholder="Write your answer here. Aim for roughly one clear point per mark."></textarea>
+          <div class="demo-actions" style="justify-content:space-between;">
+            <span class="q-counter demo-counter">0 words · 8 marks</span>
+            <a href="#demo" class="btn btn-outline">Try it for real →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1219,6 +1239,16 @@
       var lvl = tab.getAttribute('data-level');
       tabs.forEach(function (t) { t.classList.toggle('is-active', t === tab); });
       panels.forEach(function (p) { p.hidden = p.getAttribute('data-level') !== lvl; });
+    });
+  });
+
+  document.querySelectorAll('.q-answer').forEach(function (ta) {
+    var counter = ta.parentElement.querySelector('.q-counter');
+    if (!counter) return;
+    var marks = ta.getAttribute('data-marks');
+    ta.addEventListener('input', function () {
+      var words = ta.value.trim().length ? ta.value.trim().split(/\s+/).length : 0;
+      counter.textContent = words + ' words · ' + marks + ' marks';
     });
   });
 })();
