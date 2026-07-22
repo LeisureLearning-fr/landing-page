@@ -1043,9 +1043,18 @@
         <div class="demo-actions" style="justify-content:center;margin-top:6px;">
           <span id="mode2-counter" class="demo-counter">4 free corrections left</span>
         </div>
+        <div id="mode2-emailgate" class="demo-locked" hidden>
+          <p><strong>Nice work on the first 2.</strong> Drop your email to unlock your last 2 free corrections — same marking engine, no account needed.</p>
+          <form id="mode2-email-form" class="field-row" style="max-width:360px;margin:0 auto;">
+            <input type="email" id="mode2-email" required placeholder="you@example.com" aria-label="Email address">
+            <button type="submit" class="btn btn-primary">Unlock 2 more →</button>
+          </form>
+          <p class="demo-error" id="mode2-email-error" hidden></p>
+        </div>
         <div id="mode2-locked" class="demo-locked" hidden>
           <p><strong>That's your 4 free corrections.</strong> That's the same feedback engine behind every question in the full tool — adaptive, mapped to your weak syllabus elements, with 6 months of unlimited use.</p>
           <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="btn btn-primary" target="_blank" rel="noopener">See IGC Ready pricing →</a>
+          <p class="price-micro" style="margin-top:10px;">14-day money-back guarantee, no questions asked.</p>
         </div>
       </div>
     </div>
@@ -1065,6 +1074,7 @@
           <a href="#demo" class="btn btn-outline">Try it!</a>
         </div>
         <p class="trust-line" style="margin-top:18px;">Built by an <strong>HSE consultant</strong> currently preparing for the same exam — not a course platform, a study tool made from the inside.</p>
+        <p class="trust-line" style="margin-top:6px;">Full refund within 14 days if it's not for you — no questions asked.</p>
       </div>
 
       <div class="mockup-shell" aria-hidden="true">
@@ -1112,12 +1122,12 @@
       <p class="stat-strip-label">Early numbers — updated as we go, not rounded up</p>
       <div class="stat-strip-items">
         <div class="stat-item">
-          <span class="stat-number">31</span>
+          <span class="stat-number">47</span>
           <span class="stat-desc">questions corrected with detailed feedback</span>
         </div>
         <div class="stat-divider" aria-hidden="true"></div>
         <div class="stat-item">
-          <span class="stat-number">13</span>
+          <span class="stat-number">16</span>
           <span class="stat-desc">candidates have tried the free demo</span>
         </div>
       </div>
@@ -1260,7 +1270,7 @@
   <section class="section-pad alt" id="pricing">
     <div class="wrap">
       <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center;">
-        <span class="tag tag-safety">Launch pricing — limited</span>
+        <span class="tag tag-safety">Launch pricing — until Aug 31, first 50 buyers only</span>
         <h2 style="margin-top:14px;">One price. One payment. No subscription.</h2>
       </div>
       <div class="pricing-wrap">
@@ -1271,11 +1281,14 @@
             <span class="price-amount price-new">$20</span>
           </div>
           <p class="price-terms">One-time payment · access for 6 months · no recurring billing</p>
+          <p class="price-terms" style="margin-top:-12px;">$20 launch price ends 31 August 2026, or after the first 50 buyers — whichever comes first, then it's back to $35.</p>
 
           <ul class="price-includes">
             <li><span class="price-check">✓</span><span>Open questions marked with detailed feedback</span></li>
             <li><span class="price-check">✓</span><span>GIC1 scenario simulator + full progress tracker</span></li>
           </ul>
+
+          <div class="price-frame"><strong>Try it risk-free:</strong> full refund within 14 days, no questions asked.</div>
 
           <div class="cta-pair">
             <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="btn btn-primary btn-full" target="_blank" rel="noopener">Join now !</a>
@@ -1354,9 +1367,12 @@
   //    demo used to use) — a shared, localStorage-backed free-uses counter
   //    across all 4 questions, separate key from any other demo widget. ──
   var FREE_USES = 4;
+  var EMAIL_GATE_AT = 2; // uses remaining at/below which an email is required
   var STORAGE_KEY = 'igcMode2UsesLeft';
+  var EMAIL_GATE_KEY = 'igcMode2EmailGiven';
   var usesCounterEl = document.getElementById('mode2-counter');
   var lockedEl = document.getElementById('mode2-locked');
+  var emailGateEl = document.getElementById('mode2-emailgate');
   var submitBtns = document.querySelectorAll('.q-submit');
 
   function escapeHtml(str) {
@@ -1368,9 +1384,20 @@
     var v = parseInt(localStorage.getItem(STORAGE_KEY), 10);
     return isNaN(v) ? FREE_USES : v;
   }
+  function isEmailGiven() {
+    return localStorage.getItem(EMAIL_GATE_KEY) === '1';
+  }
   function setUsesLeft(n) {
     localStorage.setItem(STORAGE_KEY, String(n));
-    if (usesCounterEl) usesCounterEl.textContent = n > 0 ? (n + ' free correction' + (n === 1 ? '' : 's') + ' left') : 'No free corrections left';
+    if (usesCounterEl) {
+      if (n <= 0) {
+        usesCounterEl.textContent = 'No free corrections left';
+      } else if (n <= EMAIL_GATE_AT && !isEmailGiven()) {
+        usesCounterEl.textContent = n + ' free correction' + (n === 1 ? '' : 's') + ' left · email required for these';
+      } else {
+        usesCounterEl.textContent = n + ' free correction' + (n === 1 ? '' : 's') + ' left';
+      }
+    }
     if (n <= 0) lockAll();
   }
   function lockAll() {
@@ -1379,9 +1406,46 @@
     if (lockedEl) lockedEl.hidden = false;
   }
 
+  if (emailGateEl) {
+    var emailForm = document.getElementById('mode2-email-form');
+    var emailErrorEl = document.getElementById('mode2-email-error');
+    emailForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var emailInput = document.getElementById('mode2-email');
+      var email = emailInput.value.trim();
+      var submitBtn = emailForm.querySelector('button');
+      emailErrorEl.hidden = true;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Unlocking…';
+
+      fetch('https://formspree.io/f/xvzezjvp', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, _subject: "IGC Ready — Mode 2 free-corrections email gate" })
+      })
+        .then(function () {
+          localStorage.setItem(EMAIL_GATE_KEY, '1');
+          emailGateEl.hidden = true;
+          setUsesLeft(usesLeft()); // refresh counter text now the gate is cleared
+        })
+        .catch(function () {
+          emailErrorEl.hidden = false;
+          emailErrorEl.textContent = 'Something went wrong — please try again.';
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Unlock 2 more →';
+        });
+    });
+  }
+
   submitBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
       if (usesLeft() <= 0) { lockAll(); return; }
+      if (usesLeft() <= EMAIL_GATE_AT && !isEmailGiven()) {
+        if (emailGateEl) emailGateEl.hidden = false;
+        return;
+      }
       var panel = btn.closest('.q-level-panel');
       var textarea = panel.querySelector('.q-answer');
       var resultEl = panel.querySelector('.q-result');
