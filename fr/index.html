@@ -23,6 +23,9 @@
 <link rel="alternate" hreflang="en" href="https://igc-ready.com/">
 <link rel="alternate" hreflang="fr" href="https://igc-ready.com/fr/">
 <link rel="alternate" hreflang="x-default" href="https://igc-ready.com/">
+<link rel="icon" type="image/png" href="https://igc-ready.com/favicon.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://igc-ready.com/favicon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://igc-ready.com/favicon-180.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -367,6 +370,57 @@
   .section-pad{ padding: 56px 0; }
   .section-pad.alt{ background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 
+  /* ---------- stat strip (social proof) ---------- */
+  .stat-strip{
+    padding: 26px 0;
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stat-strip-label{
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .stat-strip-items{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat-item{
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+  }
+  .stat-number{
+    font-family: var(--font-mono);
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--safety-deep);
+  }
+  .stat-desc{
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    color: var(--ink);
+    max-width: 190px;
+    line-height: 1.3;
+  }
+  .stat-divider{
+    width: 1px;
+    height: 34px;
+    background: var(--line);
+  }
+  @media (max-width: 560px){
+    .stat-strip-items{ flex-direction: column; gap: 18px; }
+    .stat-divider{ display: none; }
+  }
+
   /* ---------- benefits ---------- */
   .benefits-grid{
     display:grid;
@@ -460,6 +514,20 @@
     color: var(--ink-soft);
     margin: 0;
   }
+  .about-linkedin{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width: 32px;
+    height: 32px;
+    margin-top: 4px;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .about-linkedin:hover{ background: var(--ink); color: var(--paper); }
+  .about-linkedin svg{ width: 16px; height: 16px; fill: currentColor; }
   .about-text h2{ font-size: clamp(1.4rem, 2.6vw + 0.6rem, 1.9rem); margin-top: 14px; }
   .about-text p{ color: var(--ink-soft); }
 
@@ -503,6 +571,27 @@
     white-space: pre-line;
     margin-bottom: 14px;
   }
+  .q-hint{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--safety);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 4px;
+  }
+  .q-hint p{
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--safety-deep);
+    margin: 0 0 8px;
+  }
+  .q-hint ul{ margin: 0; padding-left: 1.1em; color: var(--ink-soft); font-size: 0.92rem; }
+  .q-hint li{ margin-bottom: 4px; }
+  .q-hint li:last-child{ margin-bottom: 0; }
+  .q-level-panel[hidden]{ display: none; }
 
   .demo-textarea{
     width: 100%;
@@ -840,6 +929,105 @@
 
 <main id="top">
 
+  <!-- ============ MODE 2 SAMPLE QUESTIONS ============ -->
+  <section class="section-pad" style="padding-top:32px;padding-bottom:12px;">
+    <div class="wrap">
+      <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center;max-width:640px;">
+        <span class="tag tag-safety">Vraies questions — Mode 2, questions ouvertes adaptatives</span>
+        <h2 style="margin-top:14px;">Quatre niveaux de difficulté. De vraies questions GIC1/GIC2.</h2>
+        <p>Un exemple réel pour chaque niveau du mode de questions ouvertes adaptatives — exactement ce que vous verrez dans l'outil, pas une maquette.</p>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-tabs" role="tablist" aria-label="Exemples par niveau de difficulté">
+          <button class="demo-tab is-active" type="button" data-level="0">1. Guidé</button>
+          <button class="demo-tab" type="button" data-level="1">2. Ciblé</button>
+          <button class="demo-tab" type="button" data-level="2">3. Large</button>
+          <button class="demo-tab" type="button" data-level="3">4. Niveau examen</button>
+        </div>
+
+        <div class="q-level-panel" data-level="0">
+          <p style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-soft);margin:0 0 10px;">Niveau 1 : question ciblée · avec indices</p>
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <span class="tag tag-safety">Expliquez</span><span class="tag">3 points</span>
+          </div>
+          <p class="demo-question">Expliquez l'objectif de l'étape « d'annulation » dans un système de permis de travail.</p>
+          <div class="q-hint">
+            <p>Pensez à inclure</p>
+            <ul>
+              <li>Que doit-on vérifier avant d'annuler le permis ?</li>
+              <li>Qui est responsable de l'annulation du permis ?</li>
+              <li>Que confirme l'annulation ?</li>
+            </ul>
+          </div>
+          <textarea class="q-answer demo-textarea" rows="4" data-marks="3" placeholder="Écrivez votre réponse ici. Visez environ un point clair par point de note."></textarea>
+          <div class="demo-actions" style="justify-content:space-between;">
+            <span class="q-counter demo-counter">0 mots · 3 points</span>
+            <button class="q-submit btn btn-primary" type="button" data-qid="mode2_guided">Corriger ma réponse →</button>
+          </div>
+          <div class="q-result demo-result" hidden></div>
+        </div>
+
+        <div class="q-level-panel" data-level="1" hidden>
+          <p style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-soft);margin:0 0 10px;">Niveau 2 : question spécifique · un indice</p>
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <span class="tag tag-safety">Donnez</span><span class="tag">3 points</span>
+          </div>
+          <p class="demo-question">Donnez TROIS exemples d'indicateurs de performance a posteriori qu'une organisation pourrait utiliser pour suivre sa performance en santé et sécurité.</p>
+          <div class="q-hint">
+            <p>Pensez à inclure</p>
+            <ul>
+              <li>Pensez à des mesures qui enregistrent des événements déjà survenus</li>
+              <li>Pensez à des résultats tels que blessures, absences, ou mesures d'application réglementaire</li>
+            </ul>
+          </div>
+          <textarea class="q-answer demo-textarea" rows="4" data-marks="3" placeholder="Écrivez votre réponse ici. Visez environ un point clair par point de note."></textarea>
+          <div class="demo-actions" style="justify-content:space-between;">
+            <span class="q-counter demo-counter">0 mots · 3 points</span>
+            <button class="q-submit btn btn-primary" type="button" data-qid="mode2_narrow">Corriger ma réponse →</button>
+          </div>
+          <div class="q-result demo-result" hidden></div>
+        </div>
+
+        <div class="q-level-panel" data-level="2" hidden>
+          <p style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-soft);margin:0 0 10px;">Niveau 3 : question plus large · sans indices</p>
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <span class="tag tag-safety">Expliquez</span><span class="tag">6 points</span>
+          </div>
+          <p class="demo-question">Expliquez l'importance de l'implication des travailleurs dans la gestion de la santé et de la sécurité au sein d'un lieu de travail.</p>
+          <textarea class="q-answer demo-textarea" rows="4" data-marks="6" placeholder="Écrivez votre réponse ici. Visez environ un point clair par point de note."></textarea>
+          <div class="demo-actions" style="justify-content:space-between;">
+            <span class="q-counter demo-counter">0 mots · 6 points</span>
+            <button class="q-submit btn btn-primary" type="button" data-qid="mode2_broad">Corriger ma réponse →</button>
+          </div>
+          <div class="q-result demo-result" hidden></div>
+        </div>
+
+        <div class="q-level-panel" data-level="3" hidden>
+          <p style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-soft);margin:0 0 10px;">Niveau 4 : large, style examen · sans indices</p>
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <span class="tag tag-safety">Décrivez</span><span class="tag">8 points</span>
+          </div>
+          <p class="demo-question">Décrivez les avantages pour une organisation d'impliquer les travailleurs dans la prise de décision en santé et sécurité.</p>
+          <textarea class="q-answer demo-textarea" rows="4" data-marks="8" placeholder="Écrivez votre réponse ici. Visez environ un point clair par point de note."></textarea>
+          <div class="demo-actions" style="justify-content:space-between;">
+            <span class="q-counter demo-counter">0 mots · 8 points</span>
+            <button class="q-submit btn btn-primary" type="button" data-qid="mode2_exam">Corriger ma réponse →</button>
+          </div>
+          <div class="q-result demo-result" hidden></div>
+        </div>
+
+        <div class="demo-actions" style="justify-content:center;margin-top:6px;">
+          <span id="mode2-counter" class="demo-counter">4 corrections gratuites restantes</span>
+        </div>
+        <div id="mode2-locked" class="demo-locked" hidden>
+          <p><strong>Ce sont vos 4 corrections gratuites.</strong> C'est le même moteur de feedback que pour chaque question de l'outil complet — adaptatif, cartographié sur vos points faibles du programme, avec 6 mois d'accès illimité.</p>
+          <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="btn btn-primary" target="_blank" rel="noopener">Voir les tarifs IGC Ready →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="wrap hero-grid">
@@ -890,6 +1078,24 @@
             <span class="track-pct">45%</span>
             <span class="track-bar"><span class="fill-weak" style="width:45%"></span></span>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STAT STRIP (social proof) ============ -->
+  <section class="stat-strip">
+    <div class="wrap">
+      <p class="stat-strip-label">Premiers chiffres — mis à jour au fil de l'eau, sans arrondis</p>
+      <div class="stat-strip-items">
+        <div class="stat-item">
+          <span class="stat-number">31</span>
+          <span class="stat-desc">questions corrigées avec un retour détaillé</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-number">13</span>
+          <span class="stat-desc">candidats ont testé la démo gratuite</span>
         </div>
       </div>
     </div>
@@ -1012,13 +1218,16 @@
           <img src="../images/attila-headshot-round.png" alt="Attila Young, consultant HSE et créateur d'IGC Ready" class="about-avatar" width="160" height="160" loading="lazy">
           <p class="about-name">Attila Young</p>
           <p class="about-role">Consultant HSE · France</p>
+          <a class="about-linkedin" href="https://www.linkedin.com/in/attila-young-8a0305b6/" target="_blank" rel="noopener" aria-label="Attila Young sur LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45z"/></svg>
+          </a>
         </div>
         <div class="about-text">
           <span class="tag">À propos du créateur</span>
-          <h2>Conçu par quelqu'un qui a été où vous êtes</h2>
+          <h2>Conçu par quelqu'un qui a été à votre place</h2>
           <p>J'ai commencé ma carrière HSE sur des sites industriels, puis j'ai passé la majeure partie de mes premières années dans le BTP — construisant mes connaissances permis après permis, chantier après chantier.</p>
-          <p>Le vrai tournant pour moi a été la participation à un projet international. J'ai réalisé que j'avais besoin d'un langage commun avec les autres professionnels et d'un titre qui soit reconnu partout. C'est ce qui m'a poussé à m'inscrire au NEBOSH IGC.</p>
-          <p>En dehors du travail, je suis des cours sur différents sujets (gestion de projets, IA, langues, mécanique...). Certains formats étaient également ennuyeux, bien sûr, mais beaucoup d'entre eux sont qualitatifs et intelligents dans leur manière de transmettre l'information. Je suis par ailleurs moi-même formateur. Ainsi, j'ai pris le meilleur de ce que j'ai pu expérimenter dans ma vie professionnelle et personnelle pour créer cet outil, qui, je l'espère, vous sera utile.</p>
+          <p>Un vrai tournant est survenu lorsque j'ai eu l'opportunité de travailler sur un projet international. La sécurité a cessé d'être une simple question de réglementation locale pour devenir la construction d'un langage commun entre cultures et normes. C'est ce qui m'a poussé à passer moi-même le NEBOSH IGC — pour la rigueur technique, et pour la reconnaissance internationale qui permet de continuer à décrocher ce genre de missions.</p>
+          <p>En dehors du travail, je suis un adepte inconditionnel des formations — langues, nouvelles compétences, sport, vous voyez le genre. Certaines étaient franchement ennuyeuses. Mais elles m'ont appris exactement ce qui rend une révision efficace, et ce qui fait décrocher les gens — et c'est cette réflexion qui est derrière chaque question de cet outil.</p>
         </div>
       </div>
     </div>
@@ -1041,20 +1250,15 @@
           <p class="price-terms">Paiement unique · accès pendant 6 mois · aucun prélèvement récurrent</p>
 
           <ul class="price-includes">
-            <li><span class="price-check">✓</span><span>Les 5 modes d'entraînement</span></li>
-            <li><span class="price-check">✓</span><span>Questions ouvertes corrigées avec retour détaillé</span></li>
-            <li><span class="price-check">✓</span><span>Simulateur GIC1 mise en situation + documents annexes</span></li>
-            <li><span class="price-check">✓</span><span>Difficulté adaptative</span></li>
-            <li><span class="price-check">✓</span><span>Suivi complet de la progression sur le programme</span></li>
+            <li><span class="price-check">✓</span><span>Questions ouvertes corrigées avec un retour détaillé</span></li>
+            <li><span class="price-check">✓</span><span>Simulateur de mise en situation GIC1 + suivi complet de la progression</span></li>
           </ul>
-
-          <p class="price-frame">Payez une fois, révisez jusqu'à la date de votre examen. Rien ne se renouvelle, rien à penser à résilier — six mois, c'est généralement plus de marge que ce dont la plupart des candidats ont besoin.</p>
 
           <div class="cta-pair">
             <a href="https://attilayoung.gumroad.com/l/qoyns?wanted=true" class="btn btn-primary btn-full" target="_blank" rel="noopener">J'achète !</a>
             <a href="#demo" class="btn btn-outline btn-full">Essayer !</a>
           </div>
-          <p class="price-micro">Les inscrits sur liste d'attente ont un accès prioritaire, et le tarif de 35 $ est garanti avant toute hausse de prix publique.</p>
+          <p class="price-micro">Remboursement garanti sous 14 jours, sans condition.</p>
         </div>
       </div>
     </div>
@@ -1100,6 +1304,117 @@
   </div>
 </footer>
 
+<script>
+(function () {
+  var tabs = document.querySelectorAll('.demo-tabs .demo-tab');
+  var panels = document.querySelectorAll('.q-level-panel');
+  if (!tabs.length || !panels.length) return;
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var lvl = tab.getAttribute('data-level');
+      tabs.forEach(function (t) { t.classList.toggle('is-active', t === tab); });
+      panels.forEach(function (p) { p.hidden = p.getAttribute('data-level') !== lvl; });
+    });
+  });
+
+  document.querySelectorAll('.q-answer').forEach(function (ta) {
+    var counter = ta.parentElement.querySelector('.q-counter');
+    if (!counter) return;
+    var marks = ta.getAttribute('data-marks');
+    ta.addEventListener('input', function () {
+      var words = ta.value.trim().length ? ta.value.trim().split(/\s+/).length : 0;
+      counter.textContent = words + ' mots · ' + marks + ' points';
+    });
+  });
+
+  // ── Real grading via /api/grade-demo (same endpoint the pricing-section
+  //    demo used to use) — a shared, localStorage-backed free-uses counter
+  //    across all 4 questions, separate key from any other demo widget. ──
+  var FREE_USES = 4;
+  var STORAGE_KEY = 'igcMode2UsesLeft';
+  var usesCounterEl = document.getElementById('mode2-counter');
+  var lockedEl = document.getElementById('mode2-locked');
+  var submitBtns = document.querySelectorAll('.q-submit');
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function usesLeft() {
+    var v = parseInt(localStorage.getItem(STORAGE_KEY), 10);
+    return isNaN(v) ? FREE_USES : v;
+  }
+  function setUsesLeft(n) {
+    localStorage.setItem(STORAGE_KEY, String(n));
+    if (usesCounterEl) usesCounterEl.textContent = n > 0 ? (n + ' correction' + (n === 1 ? '' : 's') + ' gratuite' + (n === 1 ? '' : 's') + ' restante' + (n === 1 ? '' : 's')) : 'Plus de correction gratuite disponible';
+    if (n <= 0) lockAll();
+  }
+  function lockAll() {
+    submitBtns.forEach(function (b) { b.disabled = true; });
+    document.querySelectorAll('.q-answer').forEach(function (ta) { ta.disabled = true; });
+    if (lockedEl) lockedEl.hidden = false;
+  }
+
+  submitBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (usesLeft() <= 0) { lockAll(); return; }
+      var panel = btn.closest('.q-level-panel');
+      var textarea = panel.querySelector('.q-answer');
+      var resultEl = panel.querySelector('.q-result');
+      var answer = textarea.value.trim();
+      if (!answer) { textarea.focus(); return; }
+
+      var originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Correction en cours…';
+      resultEl.hidden = true;
+
+      fetch('/api/grade-demo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ questionId: btn.getAttribute('data-qid'), answer: answer })
+      })
+        .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+        .then(function (res) {
+          btn.disabled = false;
+          btn.textContent = originalText;
+
+          if (!res.ok) {
+            resultEl.hidden = false;
+            resultEl.innerHTML = '<p class="demo-error">' + escapeHtml(res.data.error || 'Une erreur est survenue — merci de réessayer.') + '</p>';
+            return;
+          }
+
+          var d = res.data;
+          var coveredHtml = (d.points_covered || []).map(function (p) {
+            return '<li><span class="price-check">✓</span><span>' + escapeHtml(p) + '</span></li>';
+          }).join('');
+          var missedHtml = (d.points_missed || []).map(function (p) {
+            return '<li><span class="diff-mark" style="color:var(--danger);">✕</span><span>' + escapeHtml(p) + '</span></li>';
+          }).join('');
+
+          resultEl.hidden = false;
+          resultEl.innerHTML =
+            '<p class="demo-score">' + escapeHtml(d.marks_awarded) + ' / ' + escapeHtml(d.marks_total) + '</p>' +
+            (coveredHtml ? '<ul class="price-includes">' + coveredHtml + '</ul>' : '') +
+            (missedHtml ? '<ul class="price-includes">' + missedHtml + '</ul>' : '') +
+            '<p class="demo-feedback">' + escapeHtml(d.feedback || '') + '</p>';
+
+          setUsesLeft(usesLeft() - 1);
+        })
+        .catch(function () {
+          btn.disabled = false;
+          btn.textContent = originalText;
+          resultEl.hidden = false;
+          resultEl.innerHTML = '<p class="demo-error">Problème de connexion — merci de réessayer.</p>';
+        });
+    });
+  });
+
+  setUsesLeft(usesLeft());
+})();
+</script>
 
 </body>
 </html>
