@@ -8,8 +8,8 @@
 <meta property="og:title" content="NEBOSH IGC Revision Tool 2026 — GIC1 & GIC2 Practice">
 <meta property="og:description" content="Adaptive practice, open questions marked with detailed feedback, and a GIC1 scenario simulator, built for the current NEBOSH IGC syllabus.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://www.igc-leisurelearning.com/">
-<meta property="og:image" content="https://www.igc-leisurelearning.com/og-image.png">
+<meta property="og:url" content="https://igc-ready.com/">
+<meta property="og:image" content="https://igc-ready.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="IGC Ready — NEBOSH IGC revision tool for the 2026 GIC1/GIC2 syllabus">
@@ -17,15 +17,15 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="NEBOSH IGC Revision Tool 2026 — GIC1 & GIC2 Practice">
 <meta name="twitter:description" content="Adaptive practice, open questions marked with detailed feedback, and a GIC1 scenario simulator, built for the current NEBOSH IGC syllabus.">
-<meta name="twitter:image" content="https://www.igc-leisurelearning.com/og-image.png">
+<meta name="twitter:image" content="https://igc-ready.com/og-image.png">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://www.igc-leisurelearning.com/">
-<link rel="alternate" hreflang="en" href="https://www.igc-leisurelearning.com/">
-<link rel="alternate" hreflang="fr" href="https://www.igc-leisurelearning.com/fr/">
-<link rel="alternate" hreflang="x-default" href="https://www.igc-leisurelearning.com/">
-<link rel="icon" type="image/png" href="https://www.igc-leisurelearning.com/favicon.png" sizes="32x32">
-<link rel="icon" type="image/png" href="https://www.igc-leisurelearning.com/favicon-192.png" sizes="192x192">
-<link rel="apple-touch-icon" href="https://www.igc-leisurelearning.com/favicon-180.png">
+<link rel="canonical" href="https://igc-ready.com/">
+<link rel="alternate" hreflang="en" href="https://igc-ready.com/">
+<link rel="alternate" hreflang="fr" href="https://igc-ready.com/fr/">
+<link rel="alternate" hreflang="x-default" href="https://igc-ready.com/">
+<link rel="icon" type="image/png" href="https://igc-ready.com/favicon.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://igc-ready.com/favicon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://igc-ready.com/favicon-180.png">
 
 <!--
   DEV NOTES (remove before shipping if you want a clean file):
@@ -486,6 +486,20 @@
     color: var(--ink-soft);
     margin: 0;
   }
+  .about-linkedin{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width: 32px;
+    height: 32px;
+    margin-top: 4px;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .about-linkedin:hover{ background: var(--ink); color: var(--paper); }
+  .about-linkedin svg{ width: 16px; height: 16px; fill: currentColor; }
   .about-text h2{ font-size: clamp(1.4rem, 2.6vw + 0.6rem, 1.9rem); margin-top: 14px; }
   .about-text p{ color: var(--ink-soft); }
 
@@ -863,7 +877,7 @@
 
   form.addEventListener('submit', function () {
     var email = form.email.value.trim();
-    demoLinkField.value = 'https://app.igc-leisurelearning.com/demo?email=' + encodeURIComponent(email);
+    demoLinkField.value = 'https://app.igc-ready.com/demo?email=' + encodeURIComponent(email);
     // No preventDefault — the browser submits normally and Formspree
     // redirects it to {{demo_link}}'s value.
   });
@@ -1158,6 +1172,9 @@
           <img src="images/attila-headshot-round.png" alt="Attila Young, HSE consultant and creator of IGC Ready" class="about-avatar" width="160" height="160" loading="lazy">
           <p class="about-name">Attila Young</p>
           <p class="about-role">HSE Consultant · France</p>
+          <a class="about-linkedin" href="https://www.linkedin.com/in/attila-young-8a0305b6/" target="_blank" rel="noopener" aria-label="Attila Young on LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45z"/></svg>
+          </a>
         </div>
         <div class="about-text">
           <span class="tag">About the creator</span>

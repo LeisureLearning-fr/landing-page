@@ -6,13 +6,13 @@ IGC Ready is an independent study tool. It is not affiliated with, endorsed by, 
 
 ## Product
 
-- [Home](https://www.igc-leisurelearning.com/): Overview of the IGC Ready practice tool, pricing, and free trial corrections.
+- [Home](https://igc-ready.com/): Overview of the IGC Ready practice tool, pricing, and free trial corrections.
 
 ## Blog
 
-- [How Long Does It Take to Pass the NEBOSH IGC?](https://www.igc-leisurelearning.com/blog/how-long-to-pass-nebosh-igc/): A realistic breakdown of course length versus exam readiness, and a week-by-week study plan for the current GIC1/GIC2 syllabus.
-- [Inside the NEBOSH GIC1 Exam](https://www.igc-leisurelearning.com/blog/nebosh-gic1-exam-format-explained/): What the 24-hour open-book GIC1 exam format actually involves, including the closing interview.
-- [NEBOSH IGC 2026 Syllabus Update](https://www.igc-leisurelearning.com/blog/nebosh-igc-2026-syllabus-changes/): What changed when IG1/IG2 became GIC1/GIC2, including submission, marking, and results.
-- [Does the NEBOSH IGC Expire?](https://www.igc-leisurelearning.com/blog/nebosh-igc-expire/): Certification validity, renewal rules, and how to keep the qualification competitive over time.
-- [NEBOSH IGC Practice Questions: How to Actually Prepare for GIC1 and GIC2](https://www.igc-leisurelearning.com/blog/nebosh-igc-practice-questions/): How GIC1/GIC2 open answers are actually graded, and why MCQ-only drilling doesn't transfer to the current exam format.
-- [How NEBOSH IGC Questions Are Marked: Command Words Explained](https://www.igc-leisurelearning.com/blog/nebosh-igc-command-words-explained/): A breakdown of NEBOSH GIC1 command words (identify, outline, describe, explain) and how positive marking actually works.
+- [How Long Does It Take to Pass the NEBOSH IGC?](https://igc-ready.com/blog/how-long-to-pass-nebosh-igc/): A realistic breakdown of course length versus exam readiness, and a week-by-week study plan for the current GIC1/GIC2 syllabus.
+- [Inside the NEBOSH GIC1 Exam](https://igc-ready.com/blog/nebosh-gic1-exam-format-explained/): What the 24-hour open-book GIC1 exam format actually involves, including the closing interview.
+- [NEBOSH IGC 2026 Syllabus Update](https://igc-ready.com/blog/nebosh-igc-2026-syllabus-changes/): What changed when IG1/IG2 became GIC1/GIC2, including submission, marking, and results.
+- [Does the NEBOSH IGC Expire?](https://igc-ready.com/blog/nebosh-igc-expire/): Certification validity, renewal rules, and how to keep the qualification competitive over time.
+- [NEBOSH IGC Practice Questions: How to Actually Prepare for GIC1 and GIC2](https://igc-ready.com/blog/nebosh-igc-practice-questions/): How GIC1/GIC2 open answers are actually graded, and why MCQ-only drilling doesn't transfer to the current exam format.
+- [How NEBOSH IGC Questions Are Marked: Command Words Explained](https://igc-ready.com/blog/nebosh-igc-command-words-explained/): A breakdown of NEBOSH GIC1 command words (identify, outline, describe, explain) and how positive marking actually works.
