@@ -7,6 +7,7 @@ IGC Ready is an independent study tool. It is not affiliated with, endorsed by, 
 ## Product
 
 - [Home](https://igc-ready.com/): Overview of the IGC Ready practice tool, pricing, and free trial corrections.
+- [Accueil (Français)](https://igc-ready.com/fr/): Présentation de l'outil de révision IGC Ready, tarifs et corrections d'essai gratuites, en français.
 
 ## Blog
 
@@ -16,3 +17,15 @@ IGC Ready is an independent study tool. It is not affiliated with, endorsed by, 
 - [Does the NEBOSH IGC Expire?](https://igc-ready.com/blog/nebosh-igc-expire/): Certification validity, renewal rules, and how to keep the qualification competitive over time.
 - [NEBOSH IGC Practice Questions: How to Actually Prepare for GIC1 and GIC2](https://igc-ready.com/blog/nebosh-igc-practice-questions/): How GIC1/GIC2 open answers are actually graded, and why MCQ-only drilling doesn't transfer to the current exam format.
 - [How NEBOSH IGC Questions Are Marked: Command Words Explained](https://igc-ready.com/blog/nebosh-igc-command-words-explained/): A breakdown of NEBOSH GIC1 command words (identify, outline, describe, explain) and how positive marking actually works.
+- [NEBOSH IGC: The Complete Guide](https://igc-ready.com/blog/nebosh-igc/): What the NEBOSH IGC actually is, who it's for, how GIC1 and GIC2 are assessed, what it costs, and how to prepare — a complete, plain-language guide.
+
+## Blog (Français)
+
+- [NEBOSH IGC : le guide complet](https://igc-ready.com/fr/blog/nebosh-igc-guide-complet/): Ce qu'est vraiment le NEBOSH IGC, à qui il s'adresse, comment le GIC1 et le GIC2 sont évalués, ce qu'il coûte, et comment s'y préparer.
+- [Combien de temps pour réussir le NEBOSH IGC ?](https://igc-ready.com/fr/blog/combien-de-temps-nebosh-igc/): Un vrai calcul entre durée de formation et révision, plus un plan semaine par semaine pour le GIC1/GIC2 2026.
+- [À l'intérieur de l'examen NEBOSH GIC1](https://igc-ready.com/fr/blog/format-examen-nebosh-gic1/): Ce qui se passe vraiment pendant l'examen NEBOSH GIC1 en livre ouvert — la mise en situation, les tâches, et l'entretien de clôture.
+- [Programme NEBOSH IGC 2026 : GIC1 et GIC2](https://igc-ready.com/fr/blog/nebosh-igc-programme-2026/): Ce qui a vraiment changé quand NEBOSH a renommé IG1/IG2 en GIC1/GIC2 — soumission, notation, résultats.
+- [Le NEBOSH IGC expire-t-il ?](https://igc-ready.com/fr/blog/nebosh-igc-expire-t-il/): Validité de la certification, règles de renouvellement, et comment garder la qualification à jour.
+- [Questions d'entraînement NEBOSH IGC](https://igc-ready.com/fr/blog/questions-entrainement-nebosh-igc/): Comment les réponses ouvertes du GIC1/GIC2 sont réellement corrigées, et pourquoi le seul QCM ne suffit pas pour le format actuel.
+- [Comment sont notées les questions NEBOSH IGC : les verbes de consigne expliqués](https://igc-ready.com/fr/blog/verbes-de-consigne-nebosh-igc/): Une explication des verbes de consigne du NEBOSH GIC1 (Identify, Outline, Describe, Explain) et de la façon dont les points sont attribués.
+- [Pourquoi le NEBOSH IGC compte pour un HSE français, même en France](https://igc-ready.com/fr/blog/interet-nebosh-igc-professionnels-francais/): Pourquoi le NEBOSH IGC reste demandé en France et à l'étranger, quels secteurs l'exigent, et ce que ça change pour un freelance HSE.
